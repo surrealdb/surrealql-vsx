@@ -1,388 +1,293 @@
 {
-    "Use namespace": {
-        "prefix": "use ns",
-        "body": [
-            "USE NS $1;"
-        ]
-    },
-    "Use database": {
-        "prefix": "use db",
-        "body": [
-            "USE DB $1;"
-        ]
-    },
-    "Use namespace and database": {
-        "prefix": "use ns db",
-        "body": [
-            "USE NS $1 DB $1;"
-        ]
-    },
-    "Define variable": {
-        "prefix": "let",
-        "body": [
-            "let \\$$1 = $2;"
-        ]
-    },
-    "Begin transaction": {
-        "prefix": "begin",
-        "body": [
-            "BEGIN TRANSACTION;"
-        ]
-    },
-    "Commit transaction": {
-        "prefix": "commit",
-        "body": [
-            "COMMIT TRANSACTION;"
-        ]
-    },
-    "Cancel transaction": {
-        "prefix": "cancel",
-        "body": [
-            "CANCEL TRANSACTION;"
-        ]
-    },
-    "IF-statement": {
-        "prefix": "if",
-        "body": [
-            "IF ($1) THEN",
-            "\t$2;",
-            "END;"
-        ]
-    },
-    "IF-ELSE-statement": {
-        "prefix": "if else",
-        "body": [
-            "IF ($1) THEN",
-            "\t$2;",
-            "ELSE",
-            "\t$3;",
-            "END;"
-        ]
-    },
-    "IF-ELSE-IF-statement": {
-        "prefix": "if if else",
-        "body": [
-            "IF ($1) THEN",
-            "\t$2;",
-            "ELSE IF ($3) THEN",
-            "\t$4;",
-            "END;"
-        ]
-    },
-    "IF-ELSE-IF-ELSE-statement": {
-        "prefix": "if if else else",
-        "body": [
-            "IF ($1) THEN",
-            "\t$2;",
-            "ELSE IF ($3) THEN",
-            "\t$4;",
-            "ELSE",
-            "\t$5;",
-            "END;"
-        ]
-    },
-    "Select statement": {
-        "prefix": "select",
-        "body": [
-            "SELECT $1 FROM $2;"
-        ]
-    },
-    "Insert statement": {
-        "prefix": "insert",
-        "body": [
-            "INSERT INTO $1 {",
-            "\t$2",
-            "};"
-        ]
-    },
-    "Insert multiple statement": {
-        "prefix": "insert multiple",
-        "body": [
-            "INSERT INTO $1 [",
-            "\t{ $2 },",
-            "];"
-        ]
-    },
-    "Insert values statement": {
-        "prefix": "insert values",
-        "body": [
-            "INSERT INTO $1 ($2) VALUES ($3);"
-        ]
-    },
-    "Create statement": {
-        "prefix": "create",
-        "body": [
-            "CREATE $1;"
-        ]
-    },
-    "Create set statement": {
-        "prefix": "create set",
-        "body": [
-            "CREATE $1 SET $2;"
-        ]
-    },
-    "Create content statement": {
-        "prefix": "create content",
-        "body": [
-            "CREATE $1 CONTENT {",
-            "\t$2",
-            "};"
-        ]
-    },
-    "Update statement": {
-        "prefix": "update",
-        "body": [
-            "UPDATE $1;"
-        ]
-    },
-    "Update set statement": {
-        "prefix": "update set",
-        "body": [
-            "UPDATE $1 SET $2;"
-        ]
-    },
-    "Update content statement": {
-        "prefix": "update content",
-        "body": [
-            "UPDATE $1 CONTENT {",
-            "\t$2",
-            "};"
-        ]
-    },
-    "Update merge statement": {
-        "prefix": "update merge",
-        "body": [
-            "UPDATE $1 MERGE {",
-            "\t$2",
-            "};"
-        ]
-    },
-    "Update patch statement": {
-        "prefix": "update patch",
-        "body": [
-            "UPDATE $1 PATCH [",
-            "\t{ $2 },",
-            "];"
-        ]
-    },
-    "Relate statement": {
-        "prefix": "relate",
-        "body": [
-            "RELATE $1->$2->$3;"
-        ]
-    },
-    "Relate set statement": {
-        "prefix": "relate set",
-        "body": [
-            "RELATE $1->$2->$3 SET $4;"
-        ]
-    },
-    "Relate content statement": {
-        "prefix": "relate content",
-        "body": [
-            "RELATE $1->$2->$3 CONTENT {;",
-            "\t$4",
-            "};"
-        ]
-    },
-    "Delete statement": {
-        "prefix": "delete",
-        "body": [
-            "DELETE $1;"
-        ]
-    },
-    "Define a namespace": {
-        "prefix": "define ns",
-        "body": [
-            "DEFINE NAMESPACE $1;"
-        ]
-    },
-    "Define a database": {
-        "prefix": "define db",
-        "body": [
-            "DEFINE DATABASE $1;"
-        ]
-    },
-    "Define a login": {
-        "prefix": "define login",
-        "body": [
-            "DEFINE LOGIN $1 ON $2 $3;"
-        ]
-    },
-    "Define a token": {
-        "prefix": "define token",
-        "body": [
-            "DEFINE TOKEN $1 ON $2 TYPE $3 VALUE $4;"
-        ]
-    },
-    "Define a scope": {
-        "prefix": "define scope",
-        "body": [
-            "DEFINE SCOPE $1",
-            "\tSESSION $2",
-            "\tSIGNIN ( $3 )",
-            "\tSIGNUP ( $4 )",
-            ";"
-        ]
-    },
-    "Define a schemafull table": {
-        "prefix": "define table schemafull",
-        "body": [
-            "DEFINE TABLE $1 SCHEMAFULL;"
-        ]
-    },
-    "Define a schemaless table": {
-        "prefix": "define table schemaless",
-        "body": [
-            "DEFINE TABLE $1 SCHEMALESS;"
-        ]
-    },
-    "Define a foreign table": {
-        "prefix": "define table as",
-        "body": [
-            "DEFINE TABLE $1 AS SELECT $2 FROM $3;"
-        ]
-    },
-    "Define an event": {
-        "prefix": "define event",
-        "body": [
-            "DEFINE EVENT $1 ON $2 WHEN ($3) THEN {",
-            "\t$4",
-            "};"
-        ]
-    },
-    "Define a function": {
-        "prefix": "define function",
-        "body": [
-            "DEFINE FUNCTION fn::$1($2) {",
-            "\t$3",
-            "};"
-        ]
-    },
-    "Define a field": {
-        "prefix": "define field",
-        "body": [
-            "DEFINE FIELD $1 ON $2 TYPE $3;"
-        ]
-    },
-    "Define a unique index": {
-        "prefix": "define index unique",
-        "body": [
-            "DEFINE INDEX $1 ON $2 FIELDS $3 UNIQUE;"
-        ]
-    },
-    "Define a search index": {
-        "prefix": "define index search",
-        "body": [
-            "DEFINE INDEX $1 ON $2 FIELDS $3 SEARCH ANALYZER BM25 HIGHLIGHTS;"
-        ]
-    },
-    "Define a global parameter": {
-        "prefix": "define param",
-        "body": [
-            "DEFINE PARAM \\$$1 VALUE $2;"
-        ]
-    },
-    "Remove a namespace": {
-        "prefix": "remove ns",
-        "body": [
-            "REMOVE NAMESPACE $1;"
-        ]
-    },
-    "Remove a database": {
-        "prefix": "remove db",
-        "body": [
-            "REMOVE DATABASE $1;"
-        ]
-    },
-    "Remove a login": {
-        "prefix": "remove login",
-        "body": [
-            "REMOVE LOGIN $1 ON $2;"
-        ]
-    },
-    "Remove a token": {
-        "prefix": "remove token",
-        "body": [
-            "REMOVE TOKEN $1 ON $2;"
-        ]
-    },
-    "Remove a scope": {
-        "prefix": "remove scope",
-        "body": [
-            "REMOVE SCOPE $1;"
-        ]
-    },
-    "Remove a table": {
-        "prefix": "remove table",
-        "body": [
-            "REMOVE TABLE $1;"
-        ]
-    },
-    "Remove an event": {
-        "prefix": "remove event",
-        "body": [
-            "REMOVE EVENT $1 ON $2;"
-        ]
-    },
-    "Remove a function": {
-        "prefix": "remove function",
-        "body": [
-            "REMOVE FUNCTION fn::$1;"
-        ]
-    },
-    "Remove a field": {
-        "prefix": "remove field",
-        "body": [
-            "DEFINE FIELD $1 ON $2;"
-        ]
-    },
-    "Remove an index": {
-        "prefix": "remove index",
-        "body": [
-            "REMOVE INDEX $1 ON $2;"
-        ]
-    },
-    "Remove a global parameter": {
-        "prefix": "remove param",
-        "body": [
-            "REMOVE PARAM \\$$1;"
-        ]
-    },
-    "Info for KV": {
-        "prefix": "info kv",
-        "body": [
-            "INFO FOR KV;"
-        ]
-    },
-    "Info for a namespace": {
-        "prefix": "info ns",
-        "body": [
-            "INFO FOR NS $1;"
-        ]
-    },
-    "Info for a database": {
-        "prefix": "info db",
-        "body": [
-            "INFO FOR DB $1;"
-        ]
-    },
-    "Info for a scope": {
-        "prefix": "info scope",
-        "body": [
-            "INFO FOR SCOPE $1;"
-        ]
-    },
-    "Info for a table": {
-        "prefix": "info table",
-        "body": [
-            "INFO FOR TABLE $1;"
-        ]
-    },
-    "Sleep for X amount of time": {
-        "prefix": "sleep",
-        "body": [
-            "SLEEP $1;"
-        ]
-    }
+	"Use namespace": {
+		"prefix": "use ns",
+		"body": ["USE NS $1;"]
+	},
+	"Use database": {
+		"prefix": "use db",
+		"body": ["USE DB $1;"]
+	},
+	"Use namespace and database": {
+		"prefix": "use ns db",
+		"body": ["USE NS $1 DB $1;"]
+	},
+	"Define variable": {
+		"prefix": "let",
+		"body": ["let \\$$1 = $2;"]
+	},
+	"Begin transaction": {
+		"prefix": "begin",
+		"body": ["BEGIN TRANSACTION;"]
+	},
+	"Commit transaction": {
+		"prefix": "commit",
+		"body": ["COMMIT TRANSACTION;"]
+	},
+	"Cancel transaction": {
+		"prefix": "cancel",
+		"body": ["CANCEL TRANSACTION;"]
+	},
+	"IF-statement": {
+		"prefix": "if",
+		"body": ["IF ($1) {", "\t$2;", "};"]
+	},
+	"IF-ELSE-statement": {
+		"prefix": "if else",
+		"body": ["IF ($1) {", "\t$2;", "} ELSE {", "\t$3;", "};"]
+	},
+	"IF-ELSE-IF-statement": {
+		"prefix": "if if else",
+		"body": ["IF ($1) {", "\t$2;", "} ELSE IF ($3) {", "\t$4;", "};"]
+	},
+	"IF-ELSE-IF-ELSE-statement": {
+		"prefix": "if if else else",
+		"body": [
+			"IF ($1) {",
+			"\t$2;",
+			"} ELSE IF ($3) {",
+			"\t$4;",
+			"} ELSE {",
+			"\t$5;",
+			"};"
+		]
+	},
+	"Throw statement": {
+		"prefix": "throw",
+		"body": ["THROW '$1';"]
+	},
+	"For statement": {
+		"prefix": "for",
+		"body": ["FOR $1 IN $2 {", "\t$3;", "};"]
+	},
+	"Select statement": {
+		"prefix": "select",
+		"body": ["SELECT $1 FROM $2;"]
+	},
+	"Insert statement": {
+		"prefix": "insert",
+		"body": ["INSERT INTO $1 {", "\t$2", "};"]
+	},
+	"Insert multiple statement": {
+		"prefix": "insert multiple",
+		"body": ["INSERT INTO $1 [", "\t{ $2 },", "];"]
+	},
+	"Insert values statement": {
+		"prefix": "insert values",
+		"body": ["INSERT INTO $1 ($2) VALUES ($3);"]
+	},
+	"Create statement": {
+		"prefix": "create",
+		"body": ["CREATE $1;"]
+	},
+	"Create set statement": {
+		"prefix": "create set",
+		"body": ["CREATE $1 SET $2;"]
+	},
+	"Create content statement": {
+		"prefix": "create content",
+		"body": ["CREATE $1 CONTENT {", "\t$2", "};"]
+	},
+	"Update statement": {
+		"prefix": "update",
+		"body": ["UPDATE $1;"]
+	},
+	"Update set statement": {
+		"prefix": "update set",
+		"body": ["UPDATE $1 SET $2;"]
+	},
+	"Update content statement": {
+		"prefix": "update content",
+		"body": ["UPDATE $1 CONTENT {", "\t$2", "};"]
+	},
+	"Update merge statement": {
+		"prefix": "update merge",
+		"body": ["UPDATE $1 MERGE {", "\t$2", "};"]
+	},
+	"Update patch statement": {
+		"prefix": "update patch",
+		"body": ["UPDATE $1 PATCH [", "\t{ $2 },", "];"]
+	},
+	"Upsert statement": {
+		"prefix": "upsert",
+		"body": ["UPSERT $1;"]
+	},
+	"Upsert set statement": {
+		"prefix": "upsert set",
+		"body": ["UPSERT $1 SET $2;"]
+	},
+	"Upsert content statement": {
+		"prefix": "upsert content",
+		"body": ["UPSERT $1 CONTENT {", "\t$2", "};"]
+	},
+	"Upsert merge statement": {
+		"prefix": "update merge",
+		"body": ["UPSERT $1 MERGE {", "\t$2", "};"]
+	},
+	"Upsert patch statement": {
+		"prefix": "upsert patch",
+		"body": ["UPDATE $1 PATCH [", "\t{ $2 },", "];"]
+	},
+	"Relate statement": {
+		"prefix": "relate",
+		"body": ["RELATE $1->$2->$3;"]
+	},
+	"Relate set statement": {
+		"prefix": "relate set",
+		"body": ["RELATE $1->$2->$3 SET $4;"]
+	},
+	"Relate content statement": {
+		"prefix": "relate content",
+		"body": ["RELATE $1->$2->$3 CONTENT {;", "\t$4", "};"]
+	},
+	"Delete statement": {
+		"prefix": "delete",
+		"body": ["DELETE $1;"]
+	},
+	"Define a namespace": {
+		"prefix": "define ns",
+		"body": ["DEFINE NAMESPACE $1;"]
+	},
+	"Define a database": {
+		"prefix": "define db",
+		"body": ["DEFINE DATABASE $1;"]
+	},
+	"Define a user": {
+		"prefix": "define user",
+		"body": ["DEFINE USER $1 ON $2 PASSWORD '$3';"]
+	},
+	"Define a token": {
+		"prefix": "define token",
+		"body": ["DEFINE TOKEN $1 ON $2 TYPE $3 VALUE $4;"]
+	},
+	"Define a record access": {
+		"prefix": "define record access",
+		"body": [
+			"DEFINE ACCESS $1 ON DATABASE TYPE RECORD",
+			"\tSIGNIN ( $2 )",
+			"\tSIGNUP ( $3 )",
+			";"
+		]
+	},
+	"Define a schemafull table": {
+		"prefix": "define table schemafull",
+		"body": ["DEFINE TABLE $1 SCHEMAFULL;"]
+	},
+	"Define a schemaless table": {
+		"prefix": "define table schemaless",
+		"body": ["DEFINE TABLE $1 SCHEMALESS;"]
+	},
+	"Define a foreign table": {
+		"prefix": "define table as",
+		"body": ["DEFINE TABLE $1 AS SELECT $2 FROM $3;"]
+	},
+	"Define an event": {
+		"prefix": "define event",
+		"body": ["DEFINE EVENT $1 ON $2 WHEN ($3) THEN {", "\t$4", "};"]
+	},
+	"Define a function": {
+		"prefix": "define function",
+		"body": ["DEFINE FUNCTION fn::$1($2) {", "\t$3", "};"]
+	},
+	"Define a field": {
+		"prefix": "define field",
+		"body": ["DEFINE FIELD $1 ON $2 TYPE $3;"]
+	},
+	"Define a unique index": {
+		"prefix": "define index unique",
+		"body": ["DEFINE INDEX $1 ON $2 FIELDS $3 UNIQUE;"]
+	},
+	"Define a search index": {
+		"prefix": "define index search",
+		"body": ["DEFINE INDEX $1 ON $2 FIELDS $3 SEARCH ANALYZER BM25 HIGHLIGHTS;"]
+	},
+	"Define a global parameter": {
+		"prefix": "define param",
+		"body": ["DEFINE PARAM \\$$1 VALUE $2;"]
+	},
+	"Define an API": {
+		"prefix": "define api",
+		"body": [
+			"DEFINE API '/$1'",
+			"\tFOR ${2:get}",
+			"\t\tTHEN {",
+			"\t\t\t$3",
+			"\t\t};"
+		]
+	},
+	"Define a bucket": {
+		"prefix": "define bucket",
+		"body": ["DEFINE BUCKET $1 BACKEND '${2:file:/}';"]
+	},
+	"Remove a namespace": {
+		"prefix": "remove ns",
+		"body": ["REMOVE NAMESPACE $1;"]
+	},
+	"Remove a database": {
+		"prefix": "remove db",
+		"body": ["REMOVE DATABASE $1;"]
+	},
+	"Remove a user": {
+		"prefix": "remove user",
+		"body": ["REMOVE USER $1 ON $2;"]
+	},
+	"Remove a token": {
+		"prefix": "remove token",
+		"body": ["REMOVE TOKEN $1 ON $2;"]
+	},
+	"Remove a record access": {
+		"prefix": "remove record access",
+		"body": ["REMOVE ACCESS $1 ON DATABASE;"]
+	},
+	"Remove a table": {
+		"prefix": "remove table",
+		"body": ["REMOVE TABLE $1;"]
+	},
+	"Remove an event": {
+		"prefix": "remove event",
+		"body": ["REMOVE EVENT $1 ON $2;"]
+	},
+	"Remove a function": {
+		"prefix": "remove function",
+		"body": ["REMOVE FUNCTION fn::$1;"]
+	},
+	"Remove a field": {
+		"prefix": "remove field",
+		"body": ["DEFINE FIELD $1 ON $2;"]
+	},
+	"Remove an index": {
+		"prefix": "remove index",
+		"body": ["REMOVE INDEX $1 ON $2;"]
+	},
+	"Remove a global parameter": {
+		"prefix": "remove param",
+		"body": ["REMOVE PARAM \\$$1;"]
+	},
+	"Remove an API": {
+		"prefix": "remove api",
+		"body": ["REMOVE API '/$1';"]
+	},
+	"Remove a bucket": {
+		"prefix": "remove bucket",
+		"body": ["REMOVE BUCKET $1;"]
+	},
+	"Info for root": {
+		"prefix": "info root",
+		"body": ["INFO FOR ROOT;"]
+	},
+	"Info for a namespace": {
+		"prefix": "info ns",
+		"body": ["INFO FOR NS $1;"]
+	},
+	"Info for a database": {
+		"prefix": "info db",
+		"body": ["INFO FOR DB $1;"]
+	},
+	"Info for a table": {
+		"prefix": "info table",
+		"body": ["INFO FOR TABLE $1;"]
+	},
+	"Sleep for X amount of time": {
+		"prefix": "sleep",
+		"body": ["SLEEP $1;"]
+	}
 }
