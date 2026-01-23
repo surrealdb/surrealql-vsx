@@ -1,0 +1,7 @@
+.github/**
+.vscode/**
+.vscode-test/**
+examples/**
+raw/**
+.gitattributes
+.gitignore
