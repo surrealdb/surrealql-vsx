@@ -15,4 +15,4 @@ To get started:
 
 ## Credits
 
-This grammar was much inspired by [Mathe42](https://github.com/mathe42)'s work. You can find his work [here on GitHub](https://github.com/surrealdb-community/surrealql_vscode).
+This grammar was originally inspired by [Mathe42](https://github.com/mathe42)'s work. You can find his work [here on GitHub](https://github.com/surrealdb-community/surrealql_vscode).
