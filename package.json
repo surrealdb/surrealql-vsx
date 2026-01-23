@@ -19,7 +19,7 @@
 	},
 	"categories": ["Programming Languages", "Snippets"],
 	"files": [
-		"syntaxes",
+		"syntaxes/**",
 		"icon.png",
 		"language-configuration.json",
 		"LICENSE",
