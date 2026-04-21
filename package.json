@@ -10,6 +10,16 @@
 		"url": "https://surrealdb.com"
 	},
 	"homepage": "https://github.com/surrealdb/surrealql-grammar",
+	"packageManager": "bun@1.3.11",
+	"scripts": {
+		"typecheck": "tsc --noEmit -p tsconfig.json",
+		"lint:check": "biome check . --formatter-enabled=false",
+		"lint:apply": "biome check . --formatter-enabled=false --write",
+		"lint:apply:unsafe": "biome check . --formatter-enabled=false --write --unsafe",
+		"test": "bun test test/textmate",
+		"test:textmate": "bun test test/textmate",
+		"validate": "bun run typecheck && biome check . && bun run test"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/surrealdb/surrealql-grammar.git"
@@ -17,13 +27,22 @@
 	"engines": {
 		"vscode": "^1.77.0"
 	},
-	"categories": ["Programming Languages", "Snippets"],
+	"categories": [
+		"Programming Languages",
+		"Snippets"
+	],
 	"contributes": {
 		"languages": [
 			{
 				"id": "surrealql",
-				"aliases": ["SurrealQL", "surrealql"],
-				"extensions": [".surql", ".surrealql"],
+				"aliases": [
+					"SurrealQL",
+					"surrealql"
+				],
+				"extensions": [
+					".surql",
+					".surrealql"
+				],
 				"configuration": "./language-configuration.json",
 				"icon": {
 					"light": "./icon.png",
@@ -59,7 +78,10 @@
 			{
 				"scopeName": "markdown.surrealql.codeblock",
 				"path": "./syntaxes/surrealql-markdown.tmLanguage.json",
-				"injectTo": ["text.html.markdown", "source.mdx"],
+				"injectTo": [
+					"text.html.markdown",
+					"source.mdx"
+				],
 				"embeddedLanguages": {
 					"meta.embedded.block.surrealql": "surrealql"
 				}
@@ -71,5 +93,12 @@
 				"path": "./snippets.json"
 			}
 		]
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.11",
+		"@types/bun": "^1.2.0",
+		"typescript": "^5.7.0",
+		"vscode-oniguruma": "^2.0.1",
+		"vscode-textmate": "^9.3.2"
 	}
 }

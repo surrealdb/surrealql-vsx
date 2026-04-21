@@ -1,0 +1,56 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.4.11/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"includes": [
+			"test/**/*.ts",
+			"package.json",
+			"tsconfig.json",
+			"biome.json",
+			"README.md",
+			"snippets.json",
+			".github/workflows/*.yml"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentWidth": 4,
+		"indentStyle": "tab",
+		"lineWidth": 100,
+		"attributePosition": "multiline"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"suspicious": {
+				"noExplicitAny": "off",
+				"noThenProperty": "off",
+				"noMisleadingCharacterClass": "off",
+				"noArrayIndexKey": "off"
+			},
+			"style": {
+				"noUnusedTemplateLiteral": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"attributePosition": "multiline"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	}
+}

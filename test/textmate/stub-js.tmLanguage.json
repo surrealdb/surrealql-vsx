@@ -1,0 +1,23 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "JavaScriptStub",
+	"scopeName": "source.js",
+	"patterns": [
+		{
+			"match": "//.*",
+			"name": "comment.line.double-slash.js"
+		},
+		{
+			"match": "\\b(const|let|var|function|return|if|else)\\b",
+			"name": "keyword.control.js"
+		},
+		{
+			"match": "\\b[a-zA-Z_$][\\w$]*\\b",
+			"name": "variable.other.js"
+		},
+		{
+			"match": ".",
+			"name": "source.js"
+		}
+	]
+}
