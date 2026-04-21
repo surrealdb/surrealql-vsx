@@ -2,7 +2,10 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "SurrealQL",
 	"scopeName": "source.surrealql",
-	"fileTypes": [".surql", ".surrealql"],
+	"fileTypes": [
+		".surql",
+		".surrealql"
+	],
 	"foldingStartMarker": "[\\{|\\[|\\(]\\s*$",
 	"foldingStopMarker": "^\\s*[\\}|\\]\\)]",
 	"patterns": [
@@ -10,16 +13,16 @@
 			"include": "#comment"
 		},
 		{
-			"include": "#js-function"
-		},
-		{
-			"include": "#function"
-		},
-		{
 			"include": "#keywords"
 		},
 		{
 			"include": "#operators"
+		},
+		{
+			"include": "#js-function"
+		},
+		{
+			"include": "#function"
 		},
 		{
 			"include": "#value"
@@ -64,7 +67,7 @@
 		},
 		"type": {
 			"match": "[a-z]*<[a-zA-Z][a-zA-Z0-9<>|, _]+[a-zA-Z0-9>]+>",
-			"name": "test",
+			"name": "meta.type.annotation.surrealql",
 			"captures": {
 				"0": {
 					"patterns": [
@@ -85,716 +88,8 @@
 		"keywords": {
 			"patterns": [
 				{
-					"name": "keyword.control.access.surrealql",
-					"match": "\\b(ACCESS|access)\\b"
-				},
-				{
-					"name": "keyword.control.algorithm.surrealql",
-					"match": "\\b(ALGORITHM|algorithm)\\b"
-				},
-				{
-					"name": "keyword.control.all.surrealql",
-					"match": "\\b(ALL|all)\\b"
-				},
-				{
-					"name": "keyword.control.alter.surrealql",
-					"match": "\\b(ALTER|alter)\\b"
-				},
-				{
-					"name": "keyword.control.always.surrealql",
-					"match": "\\b(ALWAYS|always)\\b"
-				},
-				{
-					"name": "keyword.control.analyzer.surrealql",
-					"match": "\\b(ANALYZER|analyzer)\\b"
-				},
-				{
-					"name": "keyword.control.and.surrealql",
-					"match": "\\b(AND|and)\\b"
-				},
-				{
-					"name": "keyword.control.any.surrealql",
-					"match": "\\b(ANY|any)\\b"
-				},
-				{
-					"name": "keyword.control.api.surrealql",
-					"match": "\\b(API|api)\\b"
-				},
-				{
-					"name": "keyword.control.as.surrealql",
-					"match": "\\b(AS|as)\\b"
-				},
-				{
-					"name": "keyword.control.asc.surrealql",
-					"match": "\\b(ASC|asc)\\b"
-				},
-				{
-					"name": "keyword.control.assert.surrealql",
-					"match": "\\b(ASSERT|assert)\\b"
-				},
-				{
-					"name": "keyword.control.at.surrealql",
-					"match": "\\b(AT|at)\\b"
-				},
-				{
-					"name": "keyword.control.authenticate.surrealql",
-					"match": "\\b(AUTHENTICATE|authenticate)\\b"
-				},
-				{
-					"name": "keyword.control.auto.surrealql",
-					"match": "\\b(AUTO|auto)\\b"
-				},
-				{
-					"name": "keyword.control.backend.surrealql",
-					"match": "\\b(BACKEND|backend)\\b"
-				},
-				{
-					"name": "keyword.control.begin.surrealql",
-					"match": "\\b(BEGIN|begin)\\b"
-				},
-				{
-					"name": "keyword.control.bm25.surrealql",
-					"match": "\\b(BM25|bm25)\\b"
-				},
-				{
-					"name": "keyword.control.break.surrealql",
-					"match": "\\b(BREAK|break)\\b"
-				},
-				{
-					"name": "keyword.control.bucket.surrealql",
-					"match": "\\b(BUCKET|bucket)\\b"
-				},
-				{
-					"name": "keyword.control.by.surrealql",
-					"match": "\\b(BY|by)\\b"
-				},
-				{
-					"name": "keyword.control.cancel.surrealql",
-					"match": "\\b(CANCEL|cancel)\\b"
-				},
-				{
-					"name": "keyword.control.capacity.surrealql",
-					"match": "\\b(CAPACITY|capacity)\\b"
-				},
-				{
-					"name": "keyword.control.cascade.surrealql",
-					"match": "\\b(CASCADE|cascade)\\b"
-				},
-				{
-					"name": "keyword.control.changefeed.surrealql",
-					"match": "\\b(CHANGEFEED|changefeed)\\b"
-				},
-				{
-					"name": "keyword.control.changes.surrealql",
-					"match": "\\b(CHANGES|changes)\\b"
-				},
-				{
-					"name": "keyword.control.collate.surrealql",
-					"match": "\\b(COLLATE|collate)\\b"
-				},
-				{
-					"name": "keyword.control.columns.surrealql",
-					"match": "\\b(COLUMNS|columns)\\b"
-				},
-				{
-					"name": "keyword.control.comment.surrealql",
-					"match": "\\b(COMMENT|comment)\\b"
-				},
-				{
-					"name": "keyword.control.commit.surrealql",
-					"match": "\\b(COMMIT|commit)\\b"
-				},
-				{
-					"name": "keyword.control.computed.surrealql",
-					"match": "\\b(COMPUTED|computed)\\b"
-				},
-				{
-					"name": "keyword.control.concurrently.surrealql",
-					"match": "\\b(CONCURRENTLY|concurrently)\\b"
-				},
-				{
-					"name": "keyword.control.config.surrealql",
-					"match": "\\b(CONFIG|config)\\b"
-				},
-				{
-					"name": "keyword.control.content.surrealql",
-					"match": "\\b(CONTENT|content)\\b"
-				},
-				{
-					"name": "keyword.control.continue.surrealql",
-					"match": "\\b(CONTINUE|continue)\\b"
-				},
-				{
-					"name": "keyword.control.create.surrealql",
-					"match": "\\b(CREATE|create)\\b"
-				},
-				{
-					"name": "keyword.control.database.surrealql",
-					"match": "\\b(DATABASE|database)\\b"
-				},
-				{
-					"name": "keyword.control.db.surrealql",
-					"match": "\\b(DB|db)\\b"
-				},
-				{
-					"name": "keyword.control.default.surrealql",
-					"match": "\\b(DEFAULT|default)\\b"
-				},
-				{
-					"name": "keyword.control.defer.surrealql",
-					"match": "\\b(DEFER|defer)\\b"
-				},
-				{
-					"name": "keyword.control.define.surrealql",
-					"match": "\\b(DEFINE|define)\\b"
-				},
-				{
-					"name": "keyword.control.delete.surrealql",
-					"match": "\\b(DELETE|delete)\\b"
-				},
-				{
-					"name": "keyword.control.desc.surrealql",
-					"match": "\\b(DESC|desc)\\b"
-				},
-				{
-					"name": "keyword.control.dimension.surrealql",
-					"match": "\\b(DIMENSION|dimension)\\b"
-				},
-				{
-					"name": "keyword.control.dist.surrealql",
-					"match": "\\b(DIST|dist)\\b"
-				},
-				{
-					"name": "keyword.control.doc_ids_cache.surrealql",
-					"match": "\\b(DOC_IDS_CACHE|doc_ids_cache)\\b"
-				},
-				{
-					"name": "keyword.control.doc_ids_order.surrealql",
-					"match": "\\b(DOC_IDS_ORDER|doc_ids_order)\\b"
-				},
-				{
-					"name": "keyword.control.doc_lengths_cache.surrealql",
-					"match": "\\b(DOC_LENGTHS_CACHE|doc_lengths_cache)\\b"
-				},
-				{
-					"name": "keyword.control.doc_lengths_order.surrealql",
-					"match": "\\b(DOC_LENGTHS_ORDER|doc_lengths_order)\\b"
-				},
-				{
-					"name": "keyword.control.drop.surrealql",
-					"match": "\\b(DROP|drop)\\b"
-				},
-				{
-					"name": "keyword.control.duplicate.surrealql",
-					"match": "\\b(DUPLICATE|duplicate)\\b"
-				},
-				{
-					"name": "keyword.control.duration.surrealql",
-					"match": "\\b(DURATION|duration)\\b"
-				},
-				{
-					"name": "keyword.control.efc.surrealql",
-					"match": "\\b(EFC|efc)\\b"
-				},
-				{
-					"name": "keyword.control.else.surrealql",
-					"match": "\\b(ELSE|else)\\b"
-				},
-				{
-					"name": "keyword.control.end.surrealql",
-					"match": "\\b(END|end)\\b"
-				},
-				{
-					"name": "keyword.control.enforced.surrealql",
-					"match": "\\b(ENFORCED|enforced)\\b"
-				},
-				{
-					"name": "keyword.control.event.surrealql",
-					"match": "\\b(EVENT|event)\\b"
-				},
-				{
-					"name": "keyword.control.exclude.surrealql",
-					"match": "\\b(EXCLUDE|exclude)\\b"
-				},
-				{
-					"name": "keyword.control.exists.surrealql",
-					"match": "\\b(EXISTS|exists)\\b"
-				},
-				{
-					"name": "keyword.control.explain.surrealql",
-					"match": "\\b(EXPLAIN|explain)\\b"
-				},
-				{
-					"name": "keyword.control.expunge.surrealql",
-					"match": "\\b(EXPUNGE|expunge)\\b"
-				},
-				{
-					"name": "keyword.control.extend_candidates.surrealql",
-					"match": "\\b(EXTEND_CANDIDATES|extend_candidates)\\b"
-				},
-				{
-					"name": "keyword.control.fetch.surrealql",
-					"match": "\\b(FETCH|fetch)\\b"
-				},
-				{
-					"name": "keyword.control.field.surrealql",
-					"match": "\\b(FIELD|field)\\b"
-				},
-				{
-					"name": "keyword.control.fields.surrealql",
-					"match": "\\b(FIELDS|fields)\\b"
-				},
-				{
-					"name": "keyword.control.filters.surrealql",
-					"match": "\\b(FILTERS|filters)\\b"
-				},
-				{
-					"name": "keyword.control.flexible.surrealql",
-					"match": "\\b(FLEXIBLE|flexible)\\b"
-				},
-				{
-					"name": "keyword.control.for.surrealql",
-					"match": "\\b(FOR|for)\\b"
-				},
-				{
-					"name": "keyword.control.from.surrealql",
-					"match": "\\b(FROM|from)\\b"
-				},
-				{
-					"name": "keyword.control.function.surrealql",
-					"match": "\\b(FUNCTION|function)\\b"
-				},
-				{
-					"name": "keyword.control.functions.surrealql",
-					"match": "\\b(FUNCTIONS|functions)\\b"
-				},
-				{
-					"name": "keyword.control.get.surrealql",
-					"match": "\\b(GET|get)\\b"
-				},
-				{
-					"name": "keyword.control.graphql.surrealql",
-					"match": "\\b(GRAPHQL|graphql)\\b"
-				},
-				{
-					"name": "keyword.control.group.surrealql",
-					"match": "\\b(GROUP|group)\\b"
-				},
-				{
-					"name": "keyword.control.highlights.surrealql",
-					"match": "\\b(HIGHLIGHTS|highlights)\\b"
-				},
-				{
-					"name": "keyword.control.hnsw.surrealql",
-					"match": "\\b(HNSW|hnsw)\\b"
-				},
-				{
-					"name": "keyword.control.if.surrealql",
-					"match": "\\b(IF|if)\\b"
-				},
-				{
-					"name": "keyword.control.ignore.surrealql",
-					"match": "\\b(IGNORE|ignore)\\b"
-				},
-				{
-					"name": "keyword.control.in.surrealql",
-					"match": "\\b(IN|in)\\b"
-				},
-				{
-					"name": "keyword.control.include.surrealql",
-					"match": "\\b(INCLUDE|include)\\b"
-				},
-				{
-					"name": "keyword.control.index.surrealql",
-					"match": "\\b(INDEX|index)\\b"
-				},
-				{
-					"name": "keyword.control.info.surrealql",
-					"match": "\\b(INFO|info)\\b"
-				},
-				{
-					"name": "keyword.control.insert.surrealql",
-					"match": "\\b(INSERT|insert)\\b"
-				},
-				{
-					"name": "keyword.control.into.surrealql",
-					"match": "\\b(INTO|into)\\b"
-				},
-				{
-					"name": "keyword.control.issuer.surrealql",
-					"match": "\\b(ISSUER|issuer)\\b"
-				},
-				{
-					"name": "keyword.control.jwt.surrealql",
-					"match": "\\b(JWT|jwt)\\b"
-				},
-				{
-					"name": "keyword.control.keep_pruned_connections.surrealql",
-					"match": "\\b(KEEP_PRUNED_CONNECTIONS|keep_pruned_connections)\\b"
-				},
-				{
-					"name": "keyword.control.key.surrealql",
-					"match": "\\b(KEY|key)\\b"
-				},
-				{
-					"name": "keyword.control.kill.surrealql",
-					"match": "\\b(KILL|kill)\\b"
-				},
-				{
-					"name": "keyword.control.let.surrealql",
-					"match": "\\b(LET|let)\\b"
-				},
-				{
-					"name": "keyword.control.limit.surrealql",
-					"match": "\\b(LIMIT|limit)\\b"
-				},
-				{
-					"name": "keyword.control.live.surrealql",
-					"match": "\\b(LIVE|live)\\b"
-				},
-				{
-					"name": "keyword.control.lm.surrealql",
-					"match": "\\b(LM|lm)\\b"
-				},
-				{
-					"name": "keyword.control.m.surrealql",
-					"match": "\\b(M|m)\\b"
-				},
-				{
-					"name": "keyword.control.m0.surrealql",
-					"match": "\\b(M0|m0)\\b"
-				},
-				{
-					"name": "keyword.control.merge.surrealql",
-					"match": "\\b(MERGE|merge)\\b"
-				},
-				{
-					"name": "keyword.control.middleware.surrealql",
-					"match": "\\b(MIDDLEWARE|middleware)\\b"
-				},
-				{
-					"name": "keyword.control.mtree.surrealql",
-					"match": "\\b(MTREE|mtree)\\b"
-				},
-				{
-					"name": "keyword.control.mtree_cache.surrealql",
-					"match": "\\b(MTREE_CACHE|mtree_cache)\\b"
-				},
-				{
-					"name": "keyword.control.namespace.surrealql",
-					"match": "\\b(NAMESPACE|namespace)\\b"
-				},
-				{
-					"name": "keyword.control.noindex.surrealql",
-					"match": "\\b(NOINDEX|noindex)\\b"
-				},
-				{
-					"name": "keyword.control.normal.surrealql",
-					"match": "\\b(NORMAL|normal)\\b"
-				},
-				{
-					"name": "keyword.control.not.surrealql",
-					"match": "\\b(NOT|not)\\b"
-				},
-				{
-					"name": "keyword.control.ns.surrealql",
-					"match": "\\b(NS|ns)\\b"
-				},
-				{
-					"name": "keyword.control.numeric.surrealql",
-					"match": "\\b(NUMERIC|numeric)\\b"
-				},
-				{
-					"name": "keyword.control.omit.surrealql",
-					"match": "\\b(OMIT|omit)\\b"
-				},
-				{
-					"name": "keyword.control.on.surrealql",
-					"match": "\\b(ON|on)\\b"
-				},
-				{
-					"name": "keyword.control.only.surrealql",
-					"match": "\\b(ONLY|only)\\b"
-				},
-				{
-					"name": "keyword.control.option.surrealql",
-					"match": "\\b(OPTION|option)\\b"
-				},
-				{
-					"name": "keyword.control.order.surrealql",
-					"match": "\\b(ORDER|order)\\b"
-				},
-				{
-					"name": "keyword.control.out.surrealql",
-					"match": "\\b(OUT|out)\\b"
-				},
-				{
-					"name": "keyword.control.overwrite.surrealql",
-					"match": "\\b(OVERWRITE|overwrite)\\b"
-				},
-				{
-					"name": "keyword.control.parallel.surrealql",
-					"match": "\\b(PARALLEL|parallel)\\b"
-				},
-				{
-					"name": "keyword.control.param.surrealql",
-					"match": "\\b(PARAM|param)\\b"
-				},
-				{
-					"name": "keyword.control.passhash.surrealql",
-					"match": "\\b(PASSHASH|passhash)\\b"
-				},
-				{
-					"name": "keyword.control.password.surrealql",
-					"match": "\\b(PASSWORD|password)\\b"
-				},
-				{
-					"name": "keyword.control.patch.surrealql",
-					"match": "\\b(PATCH|patch)\\b"
-				},
-				{
-					"name": "keyword.control.permissions.surrealql",
-					"match": "\\b(PERMISSIONS|permissions)\\b"
-				},
-				{
-					"name": "keyword.control.post.surrealql",
-					"match": "\\b(POST|post)\\b"
-				},
-				{
-					"name": "keyword.control.postings_cache.surrealql",
-					"match": "\\b(POSTINGS_CACHE|postings_cache)\\b"
-				},
-				{
-					"name": "keyword.control.postings_order.surrealql",
-					"match": "\\b(POSTINGS_ORDER|postings_order)\\b"
-				},
-				{
-					"name": "keyword.control.put.surrealql",
-					"match": "\\b(PUT|put)\\b"
-				},
-				{
-					"name": "keyword.control.readonly.surrealql",
-					"match": "\\b(READONLY|readonly)\\b"
-				},
-				{
-					"name": "keyword.control.rebuild.surrealql",
-					"match": "\\b(REBUILD|rebuild)\\b"
-				},
-				{
-					"name": "keyword.control.record.surrealql",
-					"match": "\\b(RECORD|record)\\b"
-				},
-				{
-					"name": "keyword.control.reference.surrealql",
-					"match": "\\b(REFERENCE|reference)\\b"
-				},
-				{
-					"name": "keyword.control.reject.surrealql",
-					"match": "\\b(REJECT|reject)\\b"
-				},
-				{
-					"name": "keyword.control.relate.surrealql",
-					"match": "\\b(RELATE|relate)\\b"
-				},
-				{
-					"name": "keyword.control.relation.surrealql",
-					"match": "\\b(RELATION|relation)\\b"
-				},
-				{
-					"name": "keyword.control.remove.surrealql",
-					"match": "\\b(REMOVE|remove)\\b"
-				},
-				{
-					"name": "keyword.control.replace.surrealql",
-					"match": "\\b(REPLACE|replace)\\b"
-				},
-				{
-					"name": "keyword.control.return.surrealql",
-					"match": "\\b(RETURN|return)\\b"
-				},
-				{
-					"name": "keyword.control.roles.surrealql",
-					"match": "\\b(ROLES|roles)\\b"
-				},
-				{
-					"name": "keyword.control.root.surrealql",
-					"match": "\\b(ROOT|root)\\b"
-				},
-				{
-					"name": "keyword.control.sc.surrealql",
-					"match": "\\b(SC|sc)\\b"
-				},
-				{
-					"name": "keyword.control.schemafull.surrealql",
-					"match": "\\b(SCHEMAFULL|schemafull)\\b"
-				},
-				{
-					"name": "keyword.control.schemaless.surrealql",
-					"match": "\\b(SCHEMALESS|schemaless)\\b"
-				},
-				{
-					"name": "keyword.control.scope.surrealql",
-					"match": "\\b(SCOPE|scope)\\b"
-				},
-				{
-					"name": "keyword.control.search.surrealql",
-					"match": "\\b(SEARCH|search)\\b"
-				},
-				{
-					"name": "keyword.control.select.surrealql",
-					"match": "\\b(SELECT|select)\\b"
-				},
-				{
-					"name": "keyword.control.session.surrealql",
-					"match": "\\b(SESSION|session)\\b"
-				},
-				{
-					"name": "keyword.control.set.surrealql",
-					"match": "\\b(SET|set)\\b"
-				},
-				{
-					"name": "keyword.control.show.surrealql",
-					"match": "\\b(SHOW|show)\\b"
-				},
-				{
-					"name": "keyword.control.signin.surrealql",
-					"match": "\\b(SIGNIN|signin)\\b"
-				},
-				{
-					"name": "keyword.control.signup.surrealql",
-					"match": "\\b(SIGNUP|signup)\\b"
-				},
-				{
-					"name": "keyword.control.since.surrealql",
-					"match": "\\b(SINCE|since)\\b"
-				},
-				{
-					"name": "keyword.control.sleep.surrealql",
-					"match": "\\b(SLEEP|sleep)\\b"
-				},
-				{
-					"name": "keyword.control.split.surrealql",
-					"match": "\\b(SPLIT|split)\\b"
-				},
-				{
-					"name": "keyword.control.start.surrealql",
-					"match": "\\b(START|start)\\b"
-				},
-				{
-					"name": "keyword.control.structure.surrealql",
-					"match": "\\b(STRUCTURE|structure)\\b"
-				},
-				{
-					"name": "keyword.control.table.surrealql",
-					"match": "\\b(TABLE|table)\\b"
-				},
-				{
-					"name": "keyword.control.tables.surrealql",
-					"match": "\\b(TABLES|tables)\\b"
-				},
-				{
-					"name": "keyword.control.tb.surrealql",
-					"match": "\\b(TB|tb)\\b"
-				},
-				{
-					"name": "keyword.control.tempfiles.surrealql",
-					"match": "\\b(TEMPFILES|tempfiles)\\b"
-				},
-				{
-					"name": "keyword.control.terms_cache.surrealql",
-					"match": "\\b(TERMS_CACHE|terms_cache)\\b"
-				},
-				{
-					"name": "keyword.control.terms_order.surrealql",
-					"match": "\\b(TERMS_ORDER|terms_order)\\b"
-				},
-				{
-					"name": "keyword.control.then.surrealql",
-					"match": "\\b(THEN|then)\\b"
-				},
-				{
-					"name": "keyword.control.throw.surrealql",
-					"match": "\\b(THROW|throw)\\b"
-				},
-				{
-					"name": "keyword.control.timeout.surrealql",
-					"match": "\\b(TIMEOUT|timeout)\\b"
-				},
-				{
-					"name": "keyword.control.to.surrealql",
-					"match": "\\b(TO|to)\\b"
-				},
-				{
-					"name": "keyword.control.token.surrealql",
-					"match": "\\b(TOKEN|token)\\b"
-				},
-				{
-					"name": "keyword.control.tokenizers.surrealql",
-					"match": "\\b(TOKENIZERS|tokenizers)\\b"
-				},
-				{
-					"name": "keyword.control.trace.surrealql",
-					"match": "\\b(TRACE|trace)\\b"
-				},
-				{
-					"name": "keyword.control.transaction.surrealql",
-					"match": "\\b(TRANSACTION|transaction)\\b"
-				},
-				{
-					"name": "keyword.control.type.surrealql",
-					"match": "\\b(TYPE|type)\\b"
-				},
-				{
-					"name": "keyword.control.unique.surrealql",
-					"match": "\\b(UNIQUE|unique)\\b"
-				},
-				{
-					"name": "keyword.control.unset.surrealql",
-					"match": "\\b(UNSET|unset)\\b"
-				},
-				{
-					"name": "keyword.control.update.surrealql",
-					"match": "\\b(UPDATE|update)\\b"
-				},
-				{
-					"name": "keyword.control.upsert.surrealql",
-					"match": "\\b(UPSERT|upsert)\\b"
-				},
-				{
-					"name": "keyword.control.url.surrealql",
-					"match": "\\b(URL|url)\\b"
-				},
-				{
-					"name": "keyword.control.use.surrealql",
-					"match": "\\b(USE|use)\\b"
-				},
-				{
-					"name": "keyword.control.user.surrealql",
-					"match": "\\b(USER|user)\\b"
-				},
-				{
-					"name": "keyword.control.value.surrealql",
-					"match": "\\b(VALUE|value)\\b"
-				},
-				{
-					"name": "keyword.control.values.surrealql",
-					"match": "\\b(VALUES|values)\\b"
-				},
-				{
-					"name": "keyword.control.version.surrealql",
-					"match": "\\b(VERSION|version)\\b"
-				},
-				{
-					"name": "keyword.control.when.surrealql",
-					"match": "\\b(WHEN|when)\\b"
-				},
-				{
-					"name": "keyword.control.where.surrealql",
-					"match": "\\b(WHERE|where)\\b"
-				},
-				{
-					"name": "keyword.control.with.surrealql",
-					"match": "\\b(WITH|with)\\b"
+					"name": "keyword.control.surrealql",
+					"match": "(?i)\\b(keep_pruned_connections|doc_lengths_cache|doc_lengths_order|extend_candidates|postings_cache|postings_order|doc_ids_cache|doc_ids_order|authenticate|concurrently|mtree_cache|permissions|terms_cache|terms_order|transaction|changefeed|highlights|middleware|schemafull|schemaless|tokenizers|algorithm|dimension|duplicate|functions|namespace|overwrite|reference|structure|tempfiles|analyzer|capacity|computed|continue|database|duration|enforced|flexible|parallel|passhash|password|readonly|relation|function|backend|cascade|changes|collate|columns|comment|content|default|exclude|explain|expunge|filters|graphql|include|noindex|numeric|rebuild|replace|session|timeout|version|access|always|assert|bucket|cancel|commit|config|create|define|delete|exists|fields|ignore|insert|issuer|normal|option|record|reject|relate|remove|return|search|select|signin|signup|strict|tables|unique|update|upsert|values|alter|begin|break|defer|event|fetch|field|group|index|limit|merge|mtree|order|param|patch|roles|scope|since|sleep|split|start|table|throw|token|trace|unset|value|where|auto|bm25|desc|dist|drop|else|from|hnsw|info|into|kill|live|omit|only|root|show|then|type|user|when|with|all|any|api|asc|efc|end|for|get|jwt|key|let|not|out|put|set|url|use|as|at|by|db|if|in|lm|m0|ns|on|sc|tb|to|m)\\b"
 				}
 			]
 		},
@@ -805,12 +100,27 @@
 					"match": "<->|->|<-|<~"
 				},
 				{
-					"name": "keyword.operator.and.surrealql",
-					"match": "\\b(AND|and)\\b|&&"
+					"include": "#regex-literal"
 				},
 				{
-					"name": "keyword.operator.or.surrealql",
-					"match": "\\b(OR|or)\\b|\\|\\|"
+					"name": "keyword.operator.range.surrealql",
+					"match": "\\.\\.(?=\\=)"
+				},
+				{
+					"name": "keyword.operator.range.surrealql",
+					"match": "\\.\\.(?!\\.)"
+				},
+				{
+					"name": "keyword.operator.word.surrealql",
+					"match": "(?i)\\b(containsnone|containsnot|containsall|containsany|noneinside|intersects|notinside|allinside|anyinside|contains|outside|inside|and|or)\\b"
+				},
+				{
+					"name": "keyword.operator.logical-and.surrealql",
+					"match": "&&"
+				},
+				{
+					"name": "keyword.operator.logical-or.surrealql",
+					"match": "\\|\\|"
 				},
 				{
 					"name": "keyword.operator.is-not.surrealql",
@@ -821,60 +131,48 @@
 					"match": "\\b(IS|is)\\b|="
 				},
 				{
-					"name": "keyword.operator.containsall.surrealql",
-					"match": "\\b(CONTAINSALL|containsall)\\b|⊇"
-				},
-				{
-					"name": "keyword.operator.containsany.surrealql",
-					"match": "\\b(CONTAINSANY|containsany)\\b|⊃"
-				},
-				{
-					"name": "keyword.operator.containsnone.surrealql",
-					"match": "\\b(CONTAINSNONE|containsnone)\\b|⊅"
-				},
-				{
 					"name": "keyword.operator.containssome.surrealql",
 					"match": "\\b(CONTAINSSOME|containssome)\\b"
 				},
 				{
-					"name": "keyword.operator.containsnot.surrealql",
-					"match": "\\b(CONTAINSNOT|containsnot)\\b|∌"
+					"name": "keyword.operator.contains.surrealql",
+					"match": "∋"
 				},
 				{
-					"name": "keyword.operator.contains.surrealql",
-					"match": "\\b(CONTAINS|contains)\\b|∋"
+					"name": "keyword.operator.containsall.surrealql",
+					"match": "⊇"
+				},
+				{
+					"name": "keyword.operator.containsany.surrealql",
+					"match": "⊃"
+				},
+				{
+					"name": "keyword.operator.containsnone.surrealql",
+					"match": "⊅"
+				},
+				{
+					"name": "keyword.operator.containsnot.surrealql",
+					"match": "∌"
 				},
 				{
 					"name": "keyword.operator.allinside.surrealql",
-					"match": "\\b(ALLINSIDE|allinside)\\b|⊆"
+					"match": "⊆"
 				},
 				{
 					"name": "keyword.operator.anyinside.surrealql",
-					"match": "\\b(ANYINSIDE|anyinside)\\b|⊂"
+					"match": "⊂"
 				},
 				{
 					"name": "keyword.operator.noneinside.surrealql",
-					"match": "\\b(NONEINSIDE|noneinside)\\b|⊄"
-				},
-				{
-					"name": "keyword.operator.someinside.surrealql",
-					"match": "\\b(SOMEINSIDE|someinside)\\b"
+					"match": "⊄"
 				},
 				{
 					"name": "keyword.operator.notinside.surrealql",
-					"match": "\\b(NOTINSIDE|notinside|NOT IN|not in)\\b|∉"
+					"match": "∉"
 				},
 				{
 					"name": "keyword.operator.inside.surrealql",
-					"match": "\\b(INSIDE|inside)\\b|∈"
-				},
-				{
-					"name": "keyword.operator.outside.surrealql",
-					"match": "\\b(OUTSIDE|outside)\\b"
-				},
-				{
-					"name": "keyword.operator.intersects.surrealql",
-					"match": "\\b(INTERSECTS|intersects)\\b"
+					"match": "∈"
 				},
 				{
 					"name": "keyword.operator.equal.surrealql",
@@ -1320,8 +618,64 @@
 				},
 				{
 					"include": "#type"
+				},
+				{
+					"include": "#index-type"
+				},
+				{
+					"include": "#token-type"
+				},
+				{
+					"include": "#distance-name"
+				},
+				{
+					"include": "#filter-name"
+				},
+				{
+					"include": "#analyzer-tokenizer"
+				},
+				{
+					"include": "#literal-keyword"
+				},
+				{
+					"include": "#regex-literal"
+				},
+				{
+					"include": "#identifier"
 				}
 			]
+		},
+		"index-type": {
+			"match": "(?i)\\b(f32|f64|i16|i32|i64)\\b",
+			"name": "constant.language.index-type.surrealql"
+		},
+		"token-type": {
+			"match": "(?i)\\b(eddsa|es256|es384|es512|ps256|ps384|ps512|rs256|rs384|rs512|jwks)\\b",
+			"name": "support.constant.token-type.surrealql"
+		},
+		"distance-name": {
+			"match": "(?i)\\b(chebyshev|euclidean|manhattan|minkowski|hamming|jaccard|pearson|cosine)\\b",
+			"name": "support.constant.distance.surrealql"
+		},
+		"filter-name": {
+			"match": "(?i)\\b(edgengram|uppercase|snowball|ascii|ngram)\\b",
+			"name": "support.constant.filter.surrealql"
+		},
+		"analyzer-tokenizer": {
+			"match": "(?i)\\b(blank|camel|class|punct)\\b",
+			"name": "support.constant.analyzer-tokenizer.surrealql"
+		},
+		"literal-keyword": {
+			"match": "(?i)\\b(diff|full)\\b",
+			"name": "constant.language.literal.surrealql"
+		},
+		"identifier": {
+			"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+			"name": "variable.other.surrealql"
+		},
+		"regex-literal": {
+			"name": "string.regexp.surrealql",
+			"match": "(?<![A-Za-z0-9])(\\/)(?:[^\\\\/]|\\\\.|\\[(?:[^\\]\\\\]|\\\\.)*\\])*(\\/)([a-z]*)"
 		}
 	}
 }

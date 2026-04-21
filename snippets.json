@@ -41,15 +41,7 @@
 	},
 	"IF-ELSE-IF-ELSE-statement": {
 		"prefix": "if if else else",
-		"body": [
-			"IF ($1) {",
-			"\t$2;",
-			"} ELSE IF ($3) {",
-			"\t$4;",
-			"} ELSE {",
-			"\t$5;",
-			"};"
-		]
+		"body": ["IF ($1) {", "\t$2;", "} ELSE IF ($3) {", "\t$4;", "} ELSE {", "\t$5;", "};"]
 	},
 	"Throw statement": {
 		"prefix": "throw",
@@ -206,13 +198,7 @@
 	},
 	"Define an API": {
 		"prefix": "define api",
-		"body": [
-			"DEFINE API '/$1'",
-			"\tFOR ${2:get}",
-			"\t\tTHEN {",
-			"\t\t\t$3",
-			"\t\t};"
-		]
+		"body": ["DEFINE API '/$1'", "\tFOR ${2:get}", "\t\tTHEN {", "\t\t\t$3", "\t\t};"]
 	},
 	"Define a bucket": {
 		"prefix": "define bucket",
