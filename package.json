@@ -67,6 +67,7 @@
 					"source.ts",
 					"source.tsx",
 					"source.vue",
+					"source.svelte",
 					"source.surrealql"
 				],
 				"scopeName": "inline.surrealql-js-literal",
