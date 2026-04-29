@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { extractUseDirectives, findStatements } from "./statementParser";
+import { readSettings } from "../settings";
 
 /** Command id fired when the user clicks the "▶ Run" lens. */
 export const RUN_STATEMENT_COMMAND = "surrealql.runStatement";
@@ -40,6 +41,10 @@ export class SurQLCodeLensProvider implements vscode.CodeLensProvider {
 	): vscode.CodeLens[] {
 		if (token.isCancellationRequested) return [];
 		if (document.languageId !== "surrealql") return [];
+
+		const settings = readSettings();
+		if (!settings.runQueryEnabled) return [];
+
 		const text = document.getText();
 		const directives = extractUseDirectives(text);
 		const statements = findStatements(text);

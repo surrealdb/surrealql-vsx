@@ -25,6 +25,7 @@ export interface SurQLSettings {
 	readonly password: string;
 	readonly authContext: AuthContext;
 	readonly inferenceMode: InferenceMode;
+	readonly runQueryEnabled: boolean;
 }
 
 const VALID_AUTH_CONTEXTS: ReadonlySet<AuthContext> = new Set([
@@ -61,6 +62,7 @@ export function readSettings(): SurQLSettings {
 		password: cfg.get<string>("connection.password") ?? "",
 		authContext,
 		inferenceMode,
+		runQueryEnabled: cfg.get<boolean>("runQuery.enable") ?? true,
 	};
 }
 
