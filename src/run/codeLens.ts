@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
-import { extractUseDirectives, findStatements } from "./statementParser";
 import { readSettings } from "../settings";
+import { extractUseDirectives, findStatements } from "./statementParser";
 
 /** Command id fired when the user clicks the "▶ Run" lens. */
 export const RUN_STATEMENT_COMMAND = "surrealql.runStatement";
