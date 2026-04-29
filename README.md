@@ -45,6 +45,55 @@ To launch the extension in a development host, open the repo in VS Code and use 
 
 TextMate highlighting is covered by assertion-based tests under `test/textmate/` (`bun run test:textmate`), using the same `vscode-textmate` + Oniguruma stack as VS Code. Helpers live in `test/textmate/harness.ts`.
 
+### Building a VSIX for Local Testing
+
+To package the extension as a `.vsix` file that can be tested locally:
+
+1. **Build the extension** (production-optimized):
+   ```sh
+   bun run vscode:prepublish
+   ```
+
+2. **Install `vsce`** (Visual Studio Code Extension CLI):
+   ```sh
+   npm install -g @vscode/vsce
+   ```
+   Or if you prefer Bun:
+   ```sh
+   bun add -g @vscode/vsce
+   ```
+
+3. **Package the extension**:
+   ```sh
+   vsce package
+   ```
+   This generates a `.vsix` file (e.g., `surrealql-0.4.0.vsix`) in the repo root.
+
+4. **Install the extension locally** in VS Code:
+   - Open VS Code
+   - Go to the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
+   - Click the **...** menu and select **Install from VSIX...**
+   - Select the generated `.vsix` file
+   - Reload VS Code if prompted
+
+Alternatively, install from the command line:
+```sh
+code --install-extension ./surrealql-0.4.0.vsix
+```
+
+After installation, test the extension features:
+- Open or create a `.surql` or `.surrealql` file
+- Verify syntax highlighting works
+- Check that code snippets are available (press `Ctrl+Space` / `Cmd+Space`)
+- Ensure the language server runs (check the SurrealQL status bar indicator)
+- Test the **Run Query** code lens on statements
+- Connect to a SurrealDB instance and verify query execution in the results panel
+
+To uninstall the local extension:
+```sh
+code --uninstall-extension surrealdb.surrealql
+```
+
 ## Credits
 
 This grammar was originally inspired by [Mathe42](https://github.com/mathe42)'s work. You can find his work [here on GitHub](https://github.com/surrealdb-community/surrealql_vscode).
