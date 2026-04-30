@@ -59,8 +59,8 @@ export async function execute(opts: ExecuteOptions): Promise<QueryResult> {
 	const ns = nonBlank(opts.fileNamespace) ?? nonBlank(settings.namespace);
 	const db = nonBlank(opts.fileDatabase) ?? nonBlank(settings.database);
 
-	const safeNs = ns?.replace(/`/g, "\\`");
-	const safeDb = db?.replace(/`/g, "\\`");
+	const safeNs = ns?.replace(/\\/g, "\\\\").replace(/`/g, "\\`");
+	const safeDb = db?.replace(/\\/g, "\\\\").replace(/`/g, "\\`");
 	let body = "";
 	if (safeNs) body += `USE NS \`${safeNs}\`; `;
 	if (safeDb) body += `USE DB \`${safeDb}\`; `;
