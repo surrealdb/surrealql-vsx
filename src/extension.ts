@@ -50,10 +50,22 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 			vscode.window.setStatusBarMessage("SurrealQL: language server restarted", 2000);
 		}),
 		vscode.commands.registerCommand(OPEN_SETTINGS_COMMAND, () => {
-			vscode.commands.executeCommand(
-				"workbench.action.openSettings",
-				`@ext:${statusBar.extensionId}`,
-			);
+			// Cursor 1.105.x crashes its renderer whenever
+			// `workbench.action.openSettings` is invoked from an extension host
+			// (the host gets terminated regardless of the query argument). Cursor
+			// exposes its own `cursor.openVSCodeSettingsFromMenu` command, used
+			// by its own menus, which opens the VS Code-style settings GUI
+			// safely. Route through it on Cursor; keep the standard command with
+			// the `@ext:` filter on VS Code so the existing behaviour is
+			// preserved there.
+			if (vscode.env.appName === "Cursor") {
+				vscode.commands.executeCommand("cursor.openVSCodeSettingsFromMenu");
+			} else {
+				vscode.commands.executeCommand(
+					"workbench.action.openSettings",
+					`@ext:${statusBar.extensionId}`,
+				);
+			}
 		}),
 		vscode.commands.registerCommand("surrealql.clearResults", () => resultsProvider.clear()),
 		vscode.workspace.onDidChangeConfiguration(async (e) => {
