@@ -8,7 +8,9 @@
 	"files": {
 		"ignoreUnknown": false,
 		"includes": [
+			"src/**/*.ts",
 			"test/**/*.ts",
+			"esbuild.config.mjs",
 			"package.json",
 			"tsconfig.json",
 			"biome.json",

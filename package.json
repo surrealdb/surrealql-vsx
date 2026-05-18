@@ -1,8 +1,8 @@
 {
 	"name": "surrealql",
 	"displayName": "SurrealQL",
-	"description": "Syntax highlighting and snippets for SurrealQL, the query language for SurrealDB",
-	"version": "0.3.0",
+	"description": "Language support for SurrealQL — syntax highlighting, language server, run-query code lens, and snippets",
+	"version": "0.4.0",
 	"publisher": "surrealdb",
 	"icon": "./icon.png",
 	"author": {
@@ -11,14 +11,18 @@
 	},
 	"homepage": "https://github.com/surrealdb/surrealql-grammar",
 	"packageManager": "bun@1.3.11",
+	"main": "./dist/extension.js",
 	"scripts": {
 		"typecheck": "tsc --noEmit -p tsconfig.json",
+		"build": "node esbuild.config.mjs",
+		"build:watch": "node esbuild.config.mjs --watch",
+		"vscode:prepublish": "node esbuild.config.mjs --production",
 		"lint:check": "biome check . --formatter-enabled=false",
 		"lint:apply": "biome check . --formatter-enabled=false --write",
 		"lint:apply:unsafe": "biome check . --formatter-enabled=false --write --unsafe",
 		"test": "bun test test/textmate",
 		"test:textmate": "bun test test/textmate",
-		"validate": "bun run typecheck && biome check . && bun run test"
+		"validate": "bun run typecheck && biome check . && bun run test && bun run build"
 	},
 	"repository": {
 		"type": "git",
@@ -30,6 +34,9 @@
 	"categories": [
 		"Programming Languages",
 		"Snippets"
+	],
+	"activationEvents": [
+		"onLanguage:surrealql"
 	],
 	"contributes": {
 		"languages": [
@@ -92,11 +99,145 @@
 				"language": "surrealql",
 				"path": "./snippets.json"
 			}
-		]
+		],
+		"commands": [
+			{
+				"command": "surrealql.runStatement",
+				"title": "SurrealQL: Run Statement",
+				"category": "SurrealQL"
+			},
+			{
+				"command": "surrealql.restartLanguageServer",
+				"title": "SurrealQL: Restart Language Server",
+				"category": "SurrealQL"
+			},
+			{
+				"command": "surrealql.openSettings",
+				"title": "SurrealQL: Open Settings",
+				"category": "SurrealQL"
+			},
+			{
+				"command": "surrealql.clearResults",
+				"title": "SurrealQL: Clear Query Results",
+				"category": "SurrealQL"
+			}
+		],
+		"viewsContainers": {
+			"panel": [
+				{
+					"id": "surrealqlResults",
+					"title": "SurrealQL Results",
+					"icon": "./icon.png"
+				}
+			]
+		},
+		"views": {
+			"surrealqlResults": [
+				{
+					"id": "surrealqlResultsView",
+					"name": "Results",
+					"type": "webview",
+					"contextualTitle": "SurrealQL"
+				}
+			]
+		},
+		"configuration": {
+			"title": "SurrealQL",
+			"properties": {
+				"surrealql.lsp.enable": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable the SurrealQL language server.",
+					"scope": "window"
+				},
+				"surrealql.lsp.version": {
+					"type": "string",
+					"default": "latest",
+					"description": "Language server release tag to use. Set to 'latest' to always download the newest published release.",
+					"scope": "window"
+				},
+				"surrealql.lsp.binaryPath": {
+					"type": "string",
+					"default": "",
+					"description": "Optional absolute path to a surrealql-language-server binary. When set, this takes precedence over the auto-downloaded release.",
+					"scope": "window"
+				},
+				"surrealql.connection.endpoint": {
+					"type": "string",
+					"default": "http://localhost:8000",
+					"description": "SurrealDB HTTP endpoint used for the Run Query feature and forwarded to the language server.",
+					"scope": "window"
+				},
+				"surrealql.connection.namespace": {
+					"type": "string",
+					"default": "",
+					"description": "Default SurrealDB namespace. File-level USE NS directives override this value.",
+					"scope": "window"
+				},
+				"surrealql.connection.database": {
+					"type": "string",
+					"default": "",
+					"description": "Default SurrealDB database. File-level USE DB directives override this value.",
+					"scope": "window"
+				},
+				"surrealql.connection.username": {
+					"type": "string",
+					"default": "root",
+					"description": "SurrealDB username used for HTTP Basic auth.",
+					"scope": "window"
+				},
+				"surrealql.connection.password": {
+					"type": "string",
+					"default": "root",
+					"description": "SurrealDB password used for HTTP Basic auth.",
+					"scope": "window"
+				},
+				"surrealql.connection.authContext": {
+					"type": "string",
+					"default": "root",
+					"enum": [
+						"root",
+						"namespace",
+						"database",
+						"record"
+					],
+					"description": "Auth context the language server should activate.",
+					"scope": "window"
+				},
+				"surrealql.inference.mode": {
+					"type": "string",
+					"default": "both",
+					"enum": [
+						"both",
+						"workspace",
+						"db"
+					],
+					"enumDescriptions": [
+						"Use both local workspace files and the connected SurrealDB instance for schema inference.",
+						"Use only local .surql files in the workspace for schema inference.",
+						"Use only the connected SurrealDB instance for schema inference."
+					],
+					"description": "Controls which sources the language server uses to infer table and field names.",
+					"scope": "window"
+				},
+				"surrealql.runQuery.enable": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enable the \"Run Query\" code lens above SurrealQL statements.",
+					"scope": "window"
+				}
+			}
+		}
+	},
+	"dependencies": {
+		"vscode-languageclient": "^9.0.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.11",
 		"@types/bun": "^1.2.0",
+		"@types/node": "^20.0.0",
+		"@types/vscode": "^1.77.0",
+		"esbuild": "^0.25.0",
 		"typescript": "^5.7.0",
 		"vscode-oniguruma": "^2.0.1",
 		"vscode-textmate": "^9.3.2"

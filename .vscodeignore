@@ -3,5 +3,13 @@
 .vscode-test/**
 examples/**
 raw/**
+src/**
+test/**
+node_modules/**
 .gitattributes
 .gitignore
+biome.json
+bun.lock
+esbuild.config.mjs
+tsconfig.json
+**/*.map
