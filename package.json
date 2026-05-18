@@ -2,7 +2,7 @@
 	"name": "surrealql",
 	"displayName": "SurrealQL",
 	"description": "Language support for SurrealQL — syntax highlighting, language server, run-query code lens, and snippets",
-	"version": "0.4.0",
+	"version": "0.4.1",
 	"publisher": "surrealdb",
 	"icon": "./icon.png",
 	"author": {
