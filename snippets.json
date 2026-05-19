@@ -176,6 +176,10 @@
 		"prefix": "define event",
 		"body": ["DEFINE EVENT $1 ON $2 WHEN ($3) THEN {", "\t$4", "};"]
 	},
+	"Define an async event": {
+		"prefix": "define event async",
+		"body": ["DEFINE EVENT $1 ON $2 WHEN ($3) ASYNC THEN {", "\t$4", "};"]
+	},
 	"Define a function": {
 		"prefix": "define function",
 		"body": ["DEFINE FUNCTION fn::$1($2) {", "\t$3", "};"]

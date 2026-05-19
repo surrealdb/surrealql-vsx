@@ -15,6 +15,13 @@ describe("SurrealQL TextMate grammar", () => {
 		expect(scopeAtColumn("DEFINE TABLE x", 7)).toBe("keyword.control.surrealql");
 	});
 
+	test("DEFINE EVENT ASYNC keyword", () => {
+		const line = "DEFINE EVENT e ON TABLE file WHEN $event = 'DELETE' ASYNC THEN { };";
+		expect(scopeForSubstring(line, "ASYNC")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(line, "WHEN")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(line, "THEN")).toBe("keyword.control.surrealql");
+	});
+
 	test("identifiers (not reserved words)", () => {
 		expect(scopeAtColumn("FROM person", 5)).toBe("variable.other.surrealql");
 		expect(scopeForSubstring("DEFINE TABLE post SCHEMALESS", "post")).toBe(
