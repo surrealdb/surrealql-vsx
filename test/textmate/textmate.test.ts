@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { INITIAL } from "vscode-textmate";
 import {
 	grammar,
 	lineTokenParts,
@@ -7,7 +8,6 @@ import {
 	tokenizeDocument,
 	unscopedRatio,
 } from "./harness";
-import { INITIAL } from "vscode-textmate";
 
 describe("SurrealQL TextMate grammar", () => {
 	test("statement keywords", () => {
