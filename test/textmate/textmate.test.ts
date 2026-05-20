@@ -27,9 +27,7 @@ describe("SurrealQL TextMate grammar", () => {
 	test("ASYNC uses standard keyword.control scope for theme compatibility", () => {
 		const line = "DEFINE EVENT e ON TABLE t WHEN $event = 'DELETE' ASYNC THEN { };";
 		const { tokens } = grammar.tokenizeLine(line, INITIAL);
-		const asyncToken = tokens.find(
-			(t) => line.slice(t.startIndex, t.endIndex) === "ASYNC",
-		);
+		const asyncToken = tokens.find((t) => line.slice(t.startIndex, t.endIndex) === "ASYNC");
 		expect(asyncToken?.scopes).toContain("keyword.control");
 		expect(asyncToken?.scopes).toContain("keyword.control.surrealql");
 	});
