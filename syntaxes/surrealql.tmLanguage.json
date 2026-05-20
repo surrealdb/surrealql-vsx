@@ -88,8 +88,28 @@
 		"keywords": {
 			"patterns": [
 				{
-					"name": "keyword.control.surrealql",
-					"match": "(?i)\\b(keep_pruned_connections|doc_lengths_cache|doc_lengths_order|extend_candidates|postings_cache|postings_order|doc_ids_cache|doc_ids_order|authenticate|concurrently|mtree_cache|permissions|terms_cache|terms_order|transaction|changefeed|highlights|middleware|schemafull|schemaless|tokenizers|algorithm|dimension|duplicate|functions|namespace|overwrite|reference|structure|tempfiles|analyzer|capacity|computed|continue|database|duration|enforced|flexible|parallel|passhash|password|readonly|relation|function|backend|cascade|changes|collate|columns|comment|content|default|exclude|explain|expunge|filters|graphql|include|noindex|numeric|rebuild|replace|session|timeout|version|access|always|assert|async|bucket|cancel|commit|config|create|define|delete|exists|fields|ignore|insert|issuer|normal|option|record|reject|relate|remove|return|search|select|signin|signup|strict|tables|unique|update|upsert|values|alter|begin|break|defer|event|fetch|field|group|index|limit|merge|mtree|order|param|patch|roles|scope|since|sleep|split|start|table|throw|token|trace|unset|value|where|auto|bm25|desc|dist|drop|else|from|hnsw|info|into|kill|live|omit|only|root|show|then|type|user|when|with|all|any|api|asc|efc|end|for|get|jwt|key|let|not|out|put|set|url|use|as|at|by|db|if|in|lm|m0|ns|on|sc|tb|to|m)\\b"
+					"name": "keyword.control keyword.control.surrealql",
+					"match": "(?i)\\b(keep_pruned_connections|doc_lengths_cache|doc_lengths_order|extend_candidates|postings_cache|postings_order|doc_ids_cache|doc_ids_order|authenticate|concurrently|mtree_cache|permissions|terms_cache|terms_order|transaction|changefeed|highlights|middleware|schemafull|schemaless|tokenizers|algorithm|dimension|duplicate|functions|namespace|overwrite|reference|structure|tempfiles|analyzer|capacity|computed|continue|database)\\b"
+				},
+				{
+					"name": "keyword.control keyword.control.surrealql",
+					"match": "(?i)\\b(duration|enforced|flexible|function|parallel|passhash|password|readonly|relation|backend|cascade|changes|collate|columns|comment|content|default|exclude|explain|expunge|filters|graphql|include|noindex|numeric|rebuild|replace|session|timeout|version|access|always|assert|bucket|cancel)\\b"
+				},
+				{
+					"name": "keyword.control keyword.control.surrealql",
+					"match": "(?i)\\b(commit|config|create|define|delete|exists|fields|ignore|insert|issuer|normal|option|record|reject|relate|remove|return|search|select|signin|signup|strict|tables|unique|update|upsert|values|alter|async|begin|break|defer|event|fetch|field)\\b"
+				},
+				{
+					"name": "keyword.control keyword.control.surrealql",
+					"match": "(?i)\\b(group|index|limit|merge|mtree|order|param|patch|roles|scope|since|sleep|split|start|table|throw|token|trace|unset|value|where|auto|bm25|desc|dist|drop|else|from|hnsw|info|into|kill|live|omit|only)\\b"
+				},
+				{
+					"name": "keyword.control keyword.control.surrealql",
+					"match": "(?i)\\b(root|show|then|type|user|when|with|all|any|api|asc|efc|end|for|get|jwt|key|let|not|out|put|set|url|use|as|at|by|db|if|in|lm|m0|ns|on|sc)\\b"
+				},
+				{
+					"name": "keyword.control keyword.control.surrealql",
+					"match": "(?i)\\b(tb|to|m)\\b"
 				}
 			]
 		},
