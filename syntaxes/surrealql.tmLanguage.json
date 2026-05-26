@@ -97,19 +97,19 @@
 				},
 				{
 					"name": "keyword.control keyword.control.surrealql",
-					"match": "(?i)\\b(commit|config|create|define|delete|exists|fields|ignore|insert|issuer|normal|option|record|reject|relate|remove|return|search|select|signin|signup|strict|tables|unique|update|upsert|values|alter|async|begin|break|defer|event|fetch|field)\\b"
+					"match": "(?i)\\b(commit|config|create|define|delete|exists|fields|ignore|insert|issuer|normal|option|record|reject|relate|remove|return|search|select|signin|signup|tables|unique|update|upsert|values|alter|async|begin|break|defer|event|fetch|field|group)\\b"
 				},
 				{
 					"name": "keyword.control keyword.control.surrealql",
-					"match": "(?i)\\b(group|index|limit|merge|mtree|order|param|patch|roles|scope|since|sleep|split|start|table|throw|token|trace|unset|value|where|auto|bm25|desc|dist|drop|else|from|hnsw|info|into|kill|live|omit|only)\\b"
+					"match": "(?i)\\b(index|limit|merge|mtree|order|param|patch|roles|scope|since|sleep|split|start|table|throw|token|trace|unset|value|where|auto|bm25|desc|dist|drop|else|from|hnsw|info|into|kill|live|omit|only|root)\\b"
 				},
 				{
 					"name": "keyword.control keyword.control.surrealql",
-					"match": "(?i)\\b(root|show|then|type|user|when|with|all|any|api|asc|efc|end|for|get|jwt|key|let|not|out|put|set|url|use|as|at|by|db|if|in|lm|m0|ns|on|sc)\\b"
+					"match": "(?i)\\b(show|then|type|user|when|with|all|any|api|asc|efc|end|for|get|jwt|key|let|not|out|put|set|url|use|as|at|by|db|if|in|lm|m0|ns|on|sc|tb)\\b"
 				},
 				{
 					"name": "keyword.control keyword.control.surrealql",
-					"match": "(?i)\\b(tb|to|m)\\b"
+					"match": "(?i)\\b(to|m)\\b"
 				}
 			]
 		},
