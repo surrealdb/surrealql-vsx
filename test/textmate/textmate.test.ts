@@ -1,5 +1,7 @@
 import { describe, expect, test } from "bun:test";
+import { INITIAL } from "vscode-textmate";
 import {
+	grammar,
 	lineTokenParts,
 	scopeAtColumn,
 	scopeForSubstring,
@@ -13,6 +15,21 @@ describe("SurrealQL TextMate grammar", () => {
 		expect(scopeAtColumn("FROM person", 0)).toBe("keyword.control.surrealql");
 		expect(scopeAtColumn("DEFINE TABLE x", 0)).toBe("keyword.control.surrealql");
 		expect(scopeAtColumn("DEFINE TABLE x", 7)).toBe("keyword.control.surrealql");
+	});
+
+	test("DEFINE EVENT ASYNC keyword", () => {
+		const line = "DEFINE EVENT e ON TABLE file WHEN $event = 'DELETE' ASYNC THEN { };";
+		expect(scopeForSubstring(line, "ASYNC")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(line, "WHEN")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(line, "THEN")).toBe("keyword.control.surrealql");
+	});
+
+	test("ASYNC uses standard keyword.control scope for theme compatibility", () => {
+		const line = "DEFINE EVENT e ON TABLE t WHEN $event = 'DELETE' ASYNC THEN { };";
+		const { tokens } = grammar.tokenizeLine(line, INITIAL);
+		const asyncToken = tokens.find((t) => line.slice(t.startIndex, t.endIndex) === "ASYNC");
+		expect(asyncToken?.scopes).toContain("keyword.control");
+		expect(asyncToken?.scopes).toContain("keyword.control.surrealql");
 	});
 
 	test("identifiers (not reserved words)", () => {

@@ -2,7 +2,7 @@
 	"name": "surrealql",
 	"displayName": "SurrealQL",
 	"description": "Language support for SurrealQL — syntax highlighting, language server, run-query code lens, and snippets",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"publisher": "surrealdb",
 	"icon": "./icon.png",
 	"author": {
@@ -15,6 +15,7 @@
 	"scripts": {
 		"typecheck": "tsc --noEmit -p tsconfig.json",
 		"build": "node esbuild.config.mjs",
+		"build:grammar": "node scripts/build-keywords.mjs",
 		"build:watch": "node esbuild.config.mjs --watch",
 		"vscode:prepublish": "node esbuild.config.mjs --production",
 		"lint:check": "biome check . --formatter-enabled=false",
@@ -22,7 +23,7 @@
 		"lint:apply:unsafe": "biome check . --formatter-enabled=false --write --unsafe",
 		"test": "bun test test/textmate",
 		"test:textmate": "bun test test/textmate",
-		"validate": "bun run typecheck && biome check . && bun run test && bun run build"
+		"validate": "bun run build:grammar && bun run typecheck && biome check . && bun run test && bun run build"
 	},
 	"repository": {
 		"type": "git",
