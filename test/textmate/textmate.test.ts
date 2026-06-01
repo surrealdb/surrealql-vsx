@@ -83,6 +83,9 @@ describe("SurrealQL TextMate grammar", () => {
 	test("strings and numbers", () => {
 		expect(scopeForSubstring('RETURN "hi"', '"hi"')).toBe("string.quoted.double");
 		expect(scopeForSubstring("WHERE age > 18", "18")).toBe("constant.numeric.int");
+		expect(scopeForSubstring("RETURN 1_000_000", "1_000_000")).toBe("constant.numeric.int");
+		expect(scopeForSubstring("RETURN 100f", "100f")).toBe("constant.numeric.decimal");
+		expect(scopeForSubstring("RETURN 1_000.5f", "1_000.5f")).toBe("constant.numeric.decimal");
 	});
 
 	test("multi-line block: LET binds in nested scope", () => {

@@ -354,11 +354,15 @@
 		"number": {
 			"patterns": [
 				{
-					"match": "\\b\\d+\\.\\d+(?:f|dec)?\\b",
+					"match": "\\b\\d+(?:_\\d+)*\\.\\d+(?:_\\d+)*(?:[eE][+-]?\\d+(?:_\\d+)*)?(?:f|dec)?\\b",
 					"name": "constant.numeric.decimal"
 				},
 				{
-					"match": "\\b\\d+(?:f|dec)?\\b",
+					"match": "\\b\\d+(?:_\\d+)*(?:[eE][+-]?\\d+(?:_\\d+)*)?f\\b",
+					"name": "constant.numeric.decimal"
+				},
+				{
+					"match": "\\b\\d+(?:_\\d+)*(?:f|dec)?\\b",
 					"name": "constant.numeric.int"
 				}
 			]
@@ -392,7 +396,7 @@
 			]
 		},
 		"duration": {
-			"match": "(\\d+(ns|µs|ms|s|m|h|d|w|y))+",
+			"match": "(\\d+(?:_\\d+)*(ns|µs|ms|s|m|h|d|w|y))+",
 			"name": "constant.other"
 		},
 		"boolean": {
