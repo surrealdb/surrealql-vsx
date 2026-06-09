@@ -97,19 +97,19 @@
 				},
 				{
 					"name": "keyword.control keyword.control.surrealql",
-					"match": "(?i)\\b(commit|config|create|define|delete|exists|fields|ignore|insert|issuer|normal|option|record|reject|relate|remove|return|search|select|signin|signup|tables|unique|update|upsert|values|alter|async|begin|break|defer|event|fetch|field|group)\\b"
+					"match": "(?i)\\b(commit|config|create|define|delete|exists|fields|ignore|insert|issuer|normal|option|record|reject|relate|remove|return|search|select|signin|signup|strict|tables|unique|update|upsert|values|alter|async|begin|break|defer|event|fetch|field)\\b"
 				},
 				{
 					"name": "keyword.control keyword.control.surrealql",
-					"match": "(?i)\\b(index|limit|merge|mtree|order|param|patch|roles|scope|since|sleep|split|start|table|throw|token|trace|unset|value|where|auto|bm25|desc|dist|drop|else|from|hnsw|info|into|kill|live|omit|only|root)\\b"
+					"match": "(?i)\\b(group|index|limit|merge|mtree|order|param|patch|roles|scope|since|sleep|split|start|table|throw|token|trace|unset|value|where|auto|bm25|desc|dist|drop|else|from|hnsw|info|into|kill|live|omit|only)\\b"
 				},
 				{
 					"name": "keyword.control keyword.control.surrealql",
-					"match": "(?i)\\b(show|then|type|user|when|with|all|any|api|asc|efc|end|for|get|jwt|key|let|not|out|put|set|url|use|as|at|by|db|if|in|lm|m0|ns|on|sc|tb)\\b"
+					"match": "(?i)\\b(root|show|then|type|user|when|with|all|any|api|asc|efc|end|for|get|jwt|key|let|not|out|put|set|url|use|as|at|by|db|if|in|lm|m0|ns|on|sc)\\b"
 				},
 				{
 					"name": "keyword.control keyword.control.surrealql",
-					"match": "(?i)\\b(to|m)\\b"
+					"match": "(?i)\\b(tb|to|m)\\b"
 				}
 			]
 		},
@@ -354,11 +354,15 @@
 		"number": {
 			"patterns": [
 				{
-					"match": "\\b\\d+\\.\\d+(?:f|dec)?\\b",
+					"match": "\\b\\d+(?:_\\d+)*(?:\\.\\d+(?:_\\d+)*)?(?:[eE][+-]?\\d+(?:_\\d+)*)?dec\\b",
 					"name": "constant.numeric.decimal"
 				},
 				{
-					"match": "\\b\\d+(?:f|dec)?\\b",
+					"match": "\\b(?:\\d+(?:_\\d+)*f|\\d+(?:_\\d+)*(?:\\.\\d+(?:_\\d+)*(?:[eE][+-]?\\d+(?:_\\d+)*)?|[eE][+-]?\\d+(?:_\\d+)*)(?:f)?)\\b",
+					"name": "constant.numeric.decimal"
+				},
+				{
+					"match": "\\b\\d+(?:_\\d+)*\\b",
 					"name": "constant.numeric.int"
 				}
 			]
@@ -392,7 +396,7 @@
 			]
 		},
 		"duration": {
-			"match": "(\\d+(ns|µs|ms|s|m|h|d|w|y))+",
+			"match": "(\\d+(?:_\\d+)* *(?:ns|µs|ms|s|m|h|d|w|y)(?![A-Za-z_]))+",
 			"name": "constant.other"
 		},
 		"boolean": {
@@ -625,10 +629,10 @@
 					"include": "#positional"
 				},
 				{
-					"include": "#number"
+					"include": "#duration"
 				},
 				{
-					"include": "#duration"
+					"include": "#number"
 				},
 				{
 					"include": "#record"
