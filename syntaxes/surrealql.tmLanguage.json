@@ -13,6 +13,9 @@
 			"include": "#comment"
 		},
 		{
+			"include": "#type-clause"
+		},
+		{
 			"include": "#keywords"
 		},
 		{
@@ -62,6 +65,49 @@
 				},
 				{
 					"include": "#comment.block"
+				}
+			]
+		},
+		"type-clause": {
+			"begin": "(?i)\\b(TYPE)\\b",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.surrealql"
+				}
+			},
+			"end": "(?=\\b(DEFAULT|ASSERT|VALUE|COMMENT|PERMISSIONS|REFERENCE|READONLY|FLEXIBLE|COMPUTED|DIST|DIMENSION|EFC|M|LM|M0)\\b|;|$)",
+			"name": "meta.type.annotation.surrealql",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#string"
+				},
+				{
+					"include": "#number"
+				},
+				{
+					"include": "#void-type"
+				},
+				{
+					"name": "keyword.operator.union.surrealql",
+					"match": "\\|"
+				},
+				{
+					"name": "punctuation.definition.type.surrealql",
+					"match": "[\\[\\]<>]"
+				},
+				{
+					"name": "punctuation.separator.type.surrealql",
+					"match": ","
+				},
+				{
+					"include": "#index-type"
+				},
+				{
+					"name": "entity.name.type.surrealql",
+					"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
 				}
 			]
 		},
