@@ -98,3 +98,6 @@ INTERSECTS
 
 // matches
 @([0-9]+)?@
+
+// optional
+.?

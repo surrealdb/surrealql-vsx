@@ -83,6 +83,11 @@ describe("SurrealQL TextMate grammar", () => {
 		expect(scopeForSubstring(line, "/pattern/i")).toBe("string.regexp.surrealql");
 	});
 
+	test("optional chaining operator", () => {
+		const line = "DEFINE FIELD firstName ON user VALUE $value.?.trim();";
+		expect(scopeForSubstring(line, ".?")).toBe("keyword.operator.optional.surrealql");
+	});
+
 	test("strings and numbers", () => {
 		expect(scopeForSubstring('RETURN "hi"', '"hi"')).toBe("string.quoted.double");
 		expect(scopeForSubstring("WHERE age > 18", "18")).toBe("constant.numeric.int");

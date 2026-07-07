@@ -264,6 +264,10 @@
 					}
 				},
 				{
+					"name": "keyword.operator.optional.surrealql",
+					"match": "\\.\\?"
+				},
+				{
 					"name": "keyword.operator.either.surrealql",
 					"match": "\\?:"
 				},
