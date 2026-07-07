@@ -88,6 +88,22 @@ describe("SurrealQL TextMate grammar", () => {
 		expect(scopeForSubstring(line, ".?")).toBe("keyword.operator.optional.surrealql");
 	});
 
+	test("field tuple type annotation", () => {
+		const line = "DEFINE FIELD id ON pileData TYPE [string, string]";
+		expect(scopeForSubstring(line, "[")).toBe("punctuation.definition.type.surrealql");
+		expect(scopeForSubstring(line, "string")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(line, ",")).toBe("punctuation.separator.type.surrealql");
+		expect(scopeForSubstring(line, "string", 1)).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(line, "]")).toBe("punctuation.definition.type.surrealql");
+	});
+
+	test("field literal union type annotation", () => {
+		const line = "DEFINE FIELD status ON pileData TYPE 'Started' | 'Not Started'";
+		expect(scopeForSubstring(line, "'Started'")).toBe("string.quoted.single");
+		expect(scopeForSubstring(line, "|")).toBe("keyword.operator.union.surrealql");
+		expect(scopeForSubstring(line, "'Not Started'")).toBe("string.quoted.single");
+	});
+
 	test("strings and numbers", () => {
 		expect(scopeForSubstring('RETURN "hi"', '"hi"')).toBe("string.quoted.double");
 		expect(scopeForSubstring("WHERE age > 18", "18")).toBe("constant.numeric.int");
