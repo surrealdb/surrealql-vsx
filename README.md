@@ -6,6 +6,7 @@ VS Code extension for [SurrealQL](https://surrealdb.com), the query language for
 
 - **Syntax highlighting** via a TextMate grammar (also injected into Markdown code fences and JS/TS template literals).
 - **Snippets** for common SurrealQL constructs.
+- **Comment toggling** — `Ctrl+/` / `Cmd+/` understands all three SurrealQL line-comment markers (`--`, `//`, `#`), uncommenting whichever style a line uses.
 - **Language server** (`surrealql-language-server`) for diagnostics, completion, hover, go-to-definition, and references. The binary is downloaded from GitHub releases on first activation and cached under VS Code's global storage.
 - **Run Query** — a `▶ Run` code lens above every top-level statement in `.surql` / `.surrealql` files. Clicking it executes that statement against the configured SurrealDB endpoint.
 - **SurrealQL Results** panel — bottom-panel view that displays a history of executed queries (max 50) with a table or JSON detail view.

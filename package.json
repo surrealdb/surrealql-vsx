@@ -21,7 +21,8 @@
 		"lint:check": "biome check . --formatter-enabled=false",
 		"lint:apply": "biome check . --formatter-enabled=false --write",
 		"lint:apply:unsafe": "biome check . --formatter-enabled=false --write --unsafe",
-		"test": "bun test test/textmate",
+		"test": "bun test test/textmate test/comments",
+		"test:comments": "bun test test/comments",
 		"test:textmate": "bun test test/textmate",
 		"validate": "bun run build:grammar && bun run typecheck && biome check . && bun run test && bun run build"
 	},
@@ -122,8 +123,29 @@
 				"command": "surrealql.clearResults",
 				"title": "SurrealQL: Clear Query Results",
 				"category": "SurrealQL"
+			},
+			{
+				"command": "surrealql.toggleLineComment",
+				"title": "SurrealQL: Toggle Line Comment",
+				"category": "SurrealQL"
 			}
 		],
+		"keybindings": [
+			{
+				"command": "surrealql.toggleLineComment",
+				"key": "ctrl+/",
+				"mac": "cmd+/",
+				"when": "editorTextFocus && !editorReadonly && editorLangId == surrealql"
+			}
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "surrealql.toggleLineComment",
+					"when": "editorLangId == surrealql"
+				}
+			]
+		},
 		"viewsContainers": {
 			"panel": [
 				{
