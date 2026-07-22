@@ -38,22 +38,26 @@ export class SurQLLanguageClient {
 	 * Starts the language client. If already starting, returns the same
 	 * promise. If already running, resolves immediately.
 	 */
-	async start(): Promise<void> {
+	async start(opts?: { readonly forceRefresh?: boolean }): Promise<void> {
 		if (this.starting) return this.starting;
 		if (this.client?.isRunning()) return;
 		const settings = readSettings();
 		if (!settings.lspEnabled) return;
 
-		this.starting = this.doStart(settings).finally(() => {
+		this.starting = this.doStart(settings, opts?.forceRefresh ?? false).finally(() => {
 			this.starting = null;
 		});
 		return this.starting;
 	}
 
-	private async doStart(settings: ReturnType<typeof readSettings>): Promise<void> {
+	private async doStart(
+		settings: ReturnType<typeof readSettings>,
+		forceRefresh: boolean,
+	): Promise<void> {
 		const binary = await this.downloader.resolveBinary({
 			binaryOverride: settings.lspBinaryPath,
 			version: settings.lspVersion,
+			forceRefresh,
 		});
 		if (binary === null) {
 			return;
@@ -107,11 +111,13 @@ export class SurQLLanguageClient {
 
 	/**
 	 * Stops and re-starts the client, picking up the current settings snapshot
-	 * (binary path, init options, etc.).
+	 * (binary path, init options, etc.). Bypasses the 24h release-tags cache so
+	 * a user-initiated restart always checks GitHub for a newer release instead
+	 * of re-launching whatever tag was last cached.
 	 */
 	async restart(): Promise<void> {
 		await this.stop();
-		await this.start();
+		await this.start({ forceRefresh: true });
 	}
 
 	/**

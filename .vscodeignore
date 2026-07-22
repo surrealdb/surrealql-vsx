@@ -12,4 +12,5 @@ biome.json
 bun.lock
 esbuild.config.mjs
 tsconfig.json
+Makefile
 **/*.map

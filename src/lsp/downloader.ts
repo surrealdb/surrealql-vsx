@@ -120,6 +120,7 @@ export class LanguageServerDownloader {
 	async resolveBinary(opts: {
 		readonly binaryOverride: string;
 		readonly version: string;
+		readonly forceRefresh?: boolean;
 	}): Promise<string | null> {
 		const override = opts.binaryOverride.trim();
 		if (override.length > 0) {
@@ -145,7 +146,7 @@ export class LanguageServerDownloader {
 
 		let tag: string | null = opts.version.trim();
 		if (tag.length === 0 || tag.toLowerCase() === "latest") {
-			tag = await this.resolveLatestTag();
+			tag = await this.resolveLatestTag(opts.forceRefresh ?? false);
 		}
 		if (tag === null) {
 			vscode.window.showWarningMessage(
@@ -157,9 +158,10 @@ export class LanguageServerDownloader {
 		return this.getOrDownload(tag, asset);
 	}
 
-	private async resolveLatestTag(): Promise<string | null> {
+	private async resolveLatestTag(forceRefresh: boolean): Promise<string | null> {
 		const cached = await this.readTagsCache();
 		const isFresh =
+			!forceRefresh &&
 			cached !== null &&
 			Date.now() - cached.fetchedAtMs < TAGS_TTL_MS &&
 			cached.tags.length > 0;
