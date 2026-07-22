@@ -1,4 +1,9 @@
 import * as vscode from "vscode";
+import {
+	computeToggleEdits,
+	selectionLineRange,
+	TOGGLE_LINE_COMMENT_COMMAND,
+} from "./comments/toggleLineComment";
 import { SurQLLanguageClient } from "./lsp/client";
 import { LanguageServerDownloader } from "./lsp/downloader";
 import {
@@ -18,6 +23,7 @@ import { OPEN_SETTINGS_COMMAND, SurQLStatusBarItem } from "./statusbar/statusBar
  *  - the "▶ Run" code lens above each top-level statement,
  *  - the SurrealQL Results webview panel,
  *  - the SurrealQL connection status bar widget,
+ *  - the multi-token line-comment toggle bound to the standard toggle keys,
  *  - the commands they trigger.
  */
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
@@ -68,6 +74,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 			}
 		}),
 		vscode.commands.registerCommand("surrealql.clearResults", () => resultsProvider.clear()),
+		vscode.commands.registerTextEditorCommand(TOGGLE_LINE_COMMENT_COMMAND, toggleLineComment),
 		vscode.workspace.onDidChangeConfiguration(async (e) => {
 			if (!e.affectsConfiguration("surrealql")) return;
 			if (affectsStatusBar(e)) statusBar.refresh();
@@ -104,6 +111,40 @@ async function ensureStorageRoot(context: vscode.ExtensionContext): Promise<void
 		await vscode.workspace.fs.createDirectory(context.globalStorageUri);
 	} catch {
 		/* directory may already exist */
+	}
+}
+
+/**
+ * Toggle line comments across all selections. Replaces the built-in
+ * `editor.action.commentLine` for SurrealQL files (rebound to the same keys
+ * in `package.json`) because a language configuration can declare only one
+ * line-comment token while SurrealQL accepts `--`, `//` and `#`.
+ */
+function toggleLineComment(editor: vscode.TextEditor, edit: vscode.TextEditorEdit): void {
+	const insertSpace = vscode.workspace
+		.getConfiguration("editor", editor.document)
+		.get("comments.insertSpace", true);
+	const ranges = editor.selections.map((selection) =>
+		selectionLineRange(selection.start.line, selection.end.line, selection.end.character),
+	);
+	const edits = computeToggleEdits(
+		(line) => editor.document.lineAt(line).text,
+		ranges,
+		insertSpace,
+	);
+	for (const change of edits) {
+		if (change.kind === "insert") {
+			edit.insert(new vscode.Position(change.line, change.character), change.text);
+		} else {
+			edit.delete(
+				new vscode.Range(
+					change.line,
+					change.startCharacter,
+					change.line,
+					change.endCharacter,
+				),
+			);
+		}
 	}
 }
 
