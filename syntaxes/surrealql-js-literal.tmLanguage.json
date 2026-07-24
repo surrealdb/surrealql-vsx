@@ -5,6 +5,9 @@
   "patterns": [
     {
       "include": "#sql-template-literal"
+    },
+    {
+      "include": "#sql-function-call"
     }
   ],
   "repository": {
@@ -48,6 +51,41 @@
         },
         {
           "include": "source.surrealql"
+        }
+      ]
+    },
+    "sql-function-call": {
+      "name": "meta.embedded.surrealql.call",
+      "begin": "(?:(surql|surrealql)|(\\/\\*\\s*(?:surql|surrealql)\\s*\\*\\/))\\s*(\\.[_$[:alpha:]][_$[:alnum:]]*)?\\s*(<.+>)?\\(\\s*(?=[\"'`])",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.function.js"
+        },
+        "2": {
+          "name": "comment.block.js"
+        }
+      },
+      "end": "\\)",
+      "patterns": [
+        {
+          "name": "string.quoted.surrealql",
+          "begin": "([\"'`])",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.begin.js"
+            }
+          },
+          "end": "\\1",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.end.js"
+            }
+          },
+          "patterns": [
+            {
+              "include": "source.surrealql"
+            }
+          ]
         }
       ]
     }
