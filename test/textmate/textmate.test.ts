@@ -206,6 +206,71 @@ describe("SurrealQL TextMate grammar", () => {
 		expect(scopeForSubstring(begin, "STALENESS")).toBe("keyword.control.surrealql");
 	});
 
+	test("escapes close strings and identifiers on the right quote", () => {
+		const line = "RETURN \"a\\\\\" + 'it\\'s' + `we\\`ird`;";
+		expect(scopeForSubstring(line, "\\\\")).toBe("constant.character.escape.surrealql");
+		expect(scopeForSubstring(line, "+")).toBe("keyword.operator.add.surrealql");
+		expect(scopeForSubstring(line, "\\'")).toBe("constant.character.escape.surrealql");
+		expect(scopeForSubstring(line, "s'")).toBe("string.quoted.single");
+		expect(scopeForSubstring(line, "\\`")).toBe("constant.character.escape.surrealql");
+		expect(scopeForSubstring(line, ";")).toBe("source.surrealql");
+	});
+
+	test("object keys", () => {
+		const line = `CREATE person CONTENT { type: 'x', "a(b)": 1, value: {type: 2} };`;
+		expect(scopeForSubstring(line, "type")).toBe("meta.object-literal.key");
+		expect(scopeForSubstring(line, "'x'")).toBe("string.quoted.single");
+		expect(scopeForSubstring(line, '"a(b)"')).toBe("string.quoted.double");
+		expect(scopeForSubstring(line, "value")).toBe("meta.object-literal.key");
+		expect(scopeForSubstring(line, "type", 1)).toBe("meta.object-literal.key");
+	});
+
+	test("object record ids close on their own brace", () => {
+		const [first, second] = tokenizeDocument("CREATE person:{ a: 1 };\nRETURN x;");
+		expect(first?.tokens.some((t) => t.scopes.includes("meta.object-literal.key"))).toBe(true);
+		const ret = second?.tokens.at(0);
+		expect(ret?.scopes).toEqual([
+			"source.surrealql",
+			"keyword.control",
+			"keyword.control.surrealql",
+		]);
+	});
+
+	test("casts scope the type name, not the brackets", () => {
+		const line = "RETURN <option<int|string>> $x;";
+		expect(scopeForSubstring(line, "<")).toBe("punctuation.definition.type.surrealql");
+		expect(scopeForSubstring(line, "option")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(line, "int")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(line, "|")).toBe("keyword.operator.union.surrealql");
+	});
+
+	test("parameter and return types", () => {
+		const fn =
+			"DEFINE FUNCTION fn::greet($name: string, $tags: set<string, 5>) -> option<string> { RETURN $name; };";
+		expect(scopeForSubstring(fn, "$name")).toBe("variable.name");
+		expect(scopeForSubstring(fn, "string")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(fn, "set")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(fn, "5")).toBe("constant.numeric.int");
+		expect(scopeForSubstring(fn, "->")).toBe("keyword.operator.arrow.surrealql");
+		expect(scopeForSubstring(fn, "option")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(fn, "RETURN")).toBe("keyword.control.surrealql");
+		const closure = "RETURN array::map($arr, |$x: int| -> int { $x * 2 });";
+		expect(scopeForSubstring(closure, "int")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(closure, "int", 1)).toBe("entity.name.type.surrealql");
+		const graph = "SELECT * FROM (SELECT * FROM x)->likes->post;";
+		expect(scopeForSubstring(graph, "likes")).toBe("variable.other.surrealql");
+	});
+
+	test("idiom parts are never keywords", () => {
+		const line = "WHERE $user.value = 1 AND ->edges->post AND $arr...type AND $v.?.trim();";
+		expect(scopeForSubstring(line, "value")).toBe("variable.other.property.surrealql");
+		expect(scopeForSubstring(line, "edges")).toBe("variable.other.surrealql");
+		expect(scopeForSubstring(line, "type")).toBe("variable.other.property.surrealql");
+		expect(scopeForSubstring(line, "trim")).toBe("support.function");
+		expect(scopeForSubstring("RETURN 1..5", "5")).toBe("constant.numeric.int");
+		expect(scopeForSubstring("RETURN ->person:tobie", "person")).toBe("entity.name.class");
+	});
+
 	test("multi-line block: LET binds in nested scope", () => {
 		const src = `{
 \tLET $x = 5;
