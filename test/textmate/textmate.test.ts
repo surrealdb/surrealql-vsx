@@ -117,6 +117,95 @@ describe("SurrealQL TextMate grammar", () => {
 		expect(scopeForSubstring("RETURN 1_000ms", "1_000ms")).toBe("constant.other");
 	});
 
+	test("number suffixes", () => {
+		expect(scopeForSubstring("RETURN 10i8", "10i8")).toBe("constant.numeric.int");
+		expect(scopeForSubstring("RETURN 3u64", "3u64")).toBe("constant.numeric.int");
+		expect(scopeForSubstring("RETURN 2f16", "2f16")).toBe("constant.numeric.decimal");
+		expect(scopeForSubstring("RETURN 1.5f32", "1.5f32")).toBe("constant.numeric.decimal");
+		expect(scopeForSubstring("RETURN 12bigdec", "12bigdec")).toBe("constant.numeric.decimal");
+	});
+
+	test("prefixed strings", () => {
+		const line = 'RETURN ivl"2024..2025" + pd"2024-01-01" + ts"x" + s"y";';
+		expect(scopeForSubstring(line, 'ivl"')).toBe("string.quoted.double");
+		expect(scopeForSubstring(line, 'pd"')).toBe("string.quoted.double");
+		expect(scopeForSubstring(line, 'ts"')).toBe("string.quoted.double");
+		expect(scopeForSubstring(line, 's"')).toBe("string.quoted.double");
+	});
+
+	test("operators", () => {
+		expect(scopeForSubstring("RETURN !$a", "!")).toBe("keyword.operator.logical-not.surrealql");
+		expect(scopeForSubstring("RETURN $a != $b", "!=")).toBe(
+			"keyword.operator.is-not.surrealql",
+		);
+		expect(scopeForSubstring("RETURN $x % 2", "%")).toBe("keyword.operator.modulo.surrealql");
+		expect(scopeForSubstring("UPDATE t SET tags +?= 'x'", "+?=")).toBe(
+			"keyword.operator.assignment.surrealql",
+		);
+		expect(scopeForSubstring("RETURN $arr...name", "...")).toBe(
+			"keyword.operator.flatten.surrealql",
+		);
+		expect(scopeForSubstring("RETURN 1..5", "..")).toBe("keyword.operator.range.surrealql");
+		const matches = "WHERE name @1,AND@ 'x'";
+		expect(scopeForSubstring(matches, "1")).toBe("constant.numeric.int");
+		expect(scopeForSubstring(matches, "AND")).toBe("keyword.operator.word.surrealql");
+	});
+
+	test("versioned function and extension names", () => {
+		const call = "RETURN mod::foo<1.2.3>::bar(1), math::pi;";
+		expect(scopeForSubstring(call, "mod::foo")).toBe("support.function");
+		expect(scopeForSubstring(call, "<1.2.3>")).toBe("constant.numeric.version.surrealql");
+		expect(scopeForSubstring(call, "bar")).toBe("support.function");
+		expect(scopeForSubstring(call, "math::pi")).toBe("support.function");
+		const define = 'DEFINE EXTENSION mod::foo<1.2.3> FROM "silo:x" UNSIGNED;';
+		expect(scopeForSubstring(define, "EXTENSION")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(define, "<1.2.3>")).toBe("constant.numeric.version.surrealql");
+		expect(scopeForSubstring("WHERE a < 1 > b", "<")).toBe("keyword.operator.less.surrealql");
+	});
+
+	test("DEFINE TYPE", () => {
+		const line = "DEFINE TYPE status AS 'active' | 'inactive' ASSERT $value != NONE;";
+		expect(scopeForSubstring(line, "TYPE")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(line, "status")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(line, "AS")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(line, "|")).toBe("keyword.operator.union.surrealql");
+		expect(scopeForSubstring(line, "ASSERT")).toBe("keyword.control.surrealql");
+	});
+
+	test("TYPE clause ends at the next clause keyword", () => {
+		const field = "define field x on t type option<string> default 'a' inline;";
+		expect(scopeForSubstring(field, "string")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(field, "default")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(field, "inline")).toBe("keyword.control.surrealql");
+		const table = "DEFINE TABLE likes TYPE RELATION IN person OUT post ENFORCED;";
+		expect(scopeForSubstring(table, "RELATION")).toBe("entity.name.type.surrealql");
+		expect(scopeForSubstring(table, "IN")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(table, "person")).toBe("variable.other.surrealql");
+		const access = "DEFINE ACCESS a ON DATABASE TYPE JWT ALGORITHM HS512 KEY 'k';";
+		expect(scopeForSubstring(access, "ALGORITHM")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(access, "HS512")).toBe("support.constant.token-type.surrealql");
+	});
+
+	test("4.0 index, analyzer and transaction keywords", () => {
+		const index =
+			"DEFINE INDEX i ON t FIELDS v DISKANN DIMENSION 4 TYPE F16 DISTANCE COSINE_NORMALIZED HASHED_VECTOR;";
+		expect(scopeForSubstring(index, "DISKANN")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(index, "F16")).toBe("constant.language.index-type.surrealql");
+		expect(scopeForSubstring(index, "DISTANCE")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(index, "COSINE_NORMALIZED")).toBe(
+			"support.constant.distance.surrealql",
+		);
+		expect(scopeForSubstring(index, "HASHED_VECTOR")).toBe("keyword.control.surrealql");
+		const analyzer = "DEFINE ANALYZER a TOKENIZERS segment FILTERS lowercase, mapper('x');";
+		expect(scopeForSubstring(analyzer, "segment")).toBe(
+			"support.constant.analyzer-tokenizer.surrealql",
+		);
+		expect(scopeForSubstring(analyzer, "mapper")).toBe("support.constant.filter.surrealql");
+		const begin = "BEGIN TRANSACTION READ ONLY MAX STALENESS 5s;";
+		expect(scopeForSubstring(begin, "READ")).toBe("keyword.control.surrealql");
+		expect(scopeForSubstring(begin, "STALENESS")).toBe("keyword.control.surrealql");
+	});
+
 	test("multi-line block: LET binds in nested scope", () => {
 		const src = `{
 \tLET $x = 5;
