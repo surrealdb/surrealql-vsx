@@ -96,8 +96,24 @@ INTERSECTS
 /
 ÷
 
+// modulo
+%
+
+// not
+!
+
+// assignment
++=
+-=
++?=
+
 // matches
-@([0-9]+)?@
+@([0-9]+)?(,(AND|OR))?@
+@(AND|OR)@
 
 // optional
 .?
+
+// flatten
+...
+…
